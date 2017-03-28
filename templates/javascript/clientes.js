@@ -14,22 +14,18 @@ $(document).ready(function(){
 	$("#frmAdd").validate({
 		debug: true,
 		rules: {
-			txtEmail: "required",
-			txtPass: "required",
-			txtClave: "required"
-		},
+			txtNombre: "required",
+			},
 		wrapper: 'span', 
 		submitHandler: function(form){
 		
-			var obj = new TUsuario;
+			var obj = new TCliente;
 			obj.add({
 				id: $("#id").val(), 
 				nombre: $("#txtNombre").val(), 
-				apellidos: $("#txtApellidos").val(),
-				email: $("#txtEmail").val(),
-				pass: $("#txtPass").val(),
-				tipo:$("#selTipo").val(),
-				clave:$("#txtClave").val(),
+				direccion: $("#txtDireccion").val(),
+				ciudad: $("#txtCiudad").val(),
+				colonia: $("#txtColonia").val(),
 				fn: {
 					after: function(datos){
 						if (datos.band){
@@ -37,7 +33,7 @@ $(document).ready(function(){
 							$("#frmAdd").get(0).reset();
 							$('#panelTabs a[href="#listas"]').tab('show');
 						}else{
-							alert("Upps... " + datos.mensaje);
+							alert("Upps... No se pudo guardar");
 						}
 					}
 				}
@@ -47,13 +43,13 @@ $(document).ready(function(){
     });
 		
 	function getLista(){
-		$.get("?mod=listaUsuarios", function( data ) {
+		$.get("?mod=listaClientes", function( data ) {
 			$("#dvLista").html(data);
 			
 			$("[action=eliminar]").click(function(){
 				if(confirm("¿Seguro?")){
-					var obj = new TUsuario;
-					obj.del($(this).attr("usuario"), {
+					var obj = new TCliente;
+					obj.del($(this).attr("identificador"), {
 						after: function(data){
 							getLista();
 						}
@@ -64,17 +60,23 @@ $(document).ready(function(){
 			$("[action=modificar]").click(function(){
 				var el = jQuery.parseJSON($(this).attr("datos"));
 				
-				$("#id").val(el.idUsuario);
+				$("#id").val(el.idCliente);
 				$("#txtNombre").val(el.nombre);
-				$("#txtApellidos").val(el.apellidos);
-				$("#txtEmail").val(el.email);
-				$("#txtPass").val(el.pass);
-				$("#selTipo").val(el.idTipo);
-				$("#txtClave").val(el.clave);
+				$("#txtDireccion").val(el.direccion);
+				$("#txtCiudad").val(el.ciudad);
+				$("#txtColonia").val(el.colonia);
 				$('#panelTabs a[href="#add"]').tab('show');
 			});
 			
-			$("#tblUsuarios").DataTable({
+			$("[action=equipos]").click(function(){
+				var el = jQuery.parseJSON($(this).attr("datos"));
+				
+				$("#winEquipos").attr("data", $(this).attr("datos"));
+				$("#winEquipos").modal();
+				
+			});
+			
+			$("#tblDatos").DataTable({
 				"responsive": true,
 				"language": espaniol,
 				"paging": true,

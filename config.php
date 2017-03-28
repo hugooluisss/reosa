@@ -22,7 +22,6 @@ $conf['inicio'] = array(
 
 $conf['logout'] = array(
 	'controlador' => 'login.php',
-	#'vista' => 'usuarios/panel.tpl',
 	'descripcion' => 'Salir del sistema',
 	'seguridad' => false,
 	'js' => array(),
@@ -73,5 +72,4 @@ $conf['panelPrincipal'] = array(
 	'capa' => LAYOUT_DEFECTO);	
 
 includeDir("config/");
-//include_once("config/nomina.php");
 ?>

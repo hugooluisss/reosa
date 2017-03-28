@@ -33,7 +33,7 @@ class TError{
 			$texto .= '<strong> Error en la linea <span style="color:BLUE">'.$linea.'</span> del archivo <span style="color:BLUE">'.$archivo.' - MOD: '.$_REQUEST['mod'].',</span> el dia <span style="color:BLUE">'.date('d/m/Y H:m').',</span><br /></strong>';
 			$texto .= '<strong><p>El mensaje Mandado es :</p></strong>';
 			$texto .= $cadena.'<br />';
-			$texto .= '<hr>';
+			$texto .= '<hr>'.PHP_EOL;
 		
 			$this->escribeArchivo($texto);
 		}
@@ -72,7 +72,7 @@ class TError{
 				return '<b style="color:RED;">Error de Compilacion</b>';
 			break;
 			default:
-				return '<b style="color:ORANGE">Error desconocido</b>';
+				return '<b style="color:ORANGE">Error desconocido '.$numero.'</b>';
 			break;	
 		}
 	}

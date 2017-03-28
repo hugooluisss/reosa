@@ -10,17 +10,19 @@ switch($objModulo->getId()){
 	break;
 	default:
 		switch($objModulo->getAction()){
-			case 'login': case 'validarCredenciales':
+			case 'login':
 				$db = TBase::conectaDB();
-				$rs = $db->Execute("select idUsuario, pass from usuario where upper(clave) = upper('".$_POST['usuario']."') and visible = true");
+				$rs = $db->query("select idUsuario, pass from usuario where upper(clave) = upper('".$_POST['usuario']."') and visible = true");
 				$result = array('band' => false, 'mensaje' => 'Error al consultar los datos');
 				
-				if($rs->EOF)
-					$result = array('band' => false, 'mensaje' => 'El usuario no existe'); 
-				elseif(strtoupper($rs->fields['pass']) <> strtoupper($_POST['pass']))
+				$row = $rs->fetch_assoc();
+				
+				if($rs->num_rows == 0)
+					$result = array('band' => false, 'mensaje' => 'El usuario no existe');
+				elseif(strtoupper($row['pass']) <> strtoupper($_POST['pass']))
 					$result = array('band' => false, 'mensaje' => 'Contraseña inválida');
 				else{
-					$obj = new TUsuario($rs->fields['idUsuario']);
+					$obj = new TUsuario($row['idUsuario']);
 					if ($obj->getId() == '')
 						$result = array('band' => false, 'mensaje' => 'Acceso denegado', 'tipo' => $obj->getIdTipo());
 					else
@@ -28,7 +30,7 @@ switch($objModulo->getId()){
 				}
 				
 				if($result['band']){
-					$obj = new TUsuario($rs->fields['idCliente']);
+					$obj = new TUsuario($row['idUsuario']);
 					$sesion['usuario'] = $obj->getId();
 					$sesion['perfil'] = $obj->getIdTipo();
 					

@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	console.log("Cargando script");
 	$("form:not(.filter) :input:visible:enabled:first").focus();
 	
 	$("#frmLogin").validate({

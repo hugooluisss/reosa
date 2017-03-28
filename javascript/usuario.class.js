@@ -1,108 +1,81 @@
 TUsuario = function(){
 	var self = this;
 	
+	this.add = function(datos){
+		if (datos.fn.before !== undefined) datos.fn.before();
+		
+		$.post('cusuarios', {
+				"id": datos.id,
+				"nombre": datos.nombre,
+				"apellidos": datos.apellidos,
+				"email": datos.email, 
+				"pass": datos.pass,
+				"tipo": datos.tipo,
+				"clave": datos.clave,
+				"action": "add"
+			}, function(data){
+				if (data.band == 'false')
+					console.log(data.mensaje);
+					
+				if (datos.fn.after !== undefined)
+					datos.fn.after(data);
+			}, "json");
+	};
+	
+	this.savePersonales = function(nombre, apellidos, fn){
+		if (fn.before !== undefined) fn.before();
+		
+		$.post('?mod=cusuarios&action=saveDatosPersonales', {
+				"nombre": nombre,
+				"app": apellidos
+			}, function(data){
+				if (data.band == 'false')
+					console.log(data.mensaje);
+					
+				if (fn.after !== undefined)
+					fn.after(data);
+			}, "json");
+	}
+	
+	this.savePass = function(pass, fn){
+		if (fn.before !== undefined) fn.before();
+		
+		$.post('?mod=cusuarios&action=savePassword', {
+				"pass": pass
+			}, function(data){
+				if (data.band == 'false')
+					console.log(data.mensaje);
+					
+				if (fn.after !== undefined)
+					fn.after(data);
+			}, "json");
+	}
+	
+	this.del = function(usuario, fn){
+		$.post('?mod=cusuarios&action=del', {
+			"usuario": usuario,
+		}, function(data){
+			if (fn.after != undefined)
+				fn.after(data);
+			if (data.band == 'false'){
+				alert("Ocurrió un error al eliminar al usuario");
+			}
+		}, "json");
+	};
+	
 	this.login = function(usuario, pass, fn){
 		if (fn.before !== undefined)
 			fn.before();
 			
-		$.post('clogin', {
+		$.post('?mod=clogin&action=login', {
 			"usuario": usuario,
-			"pass": pass,
-			"action": "login"
+			"pass": pass
 		}, function(data){
 			if (fn.after != undefined)
 				fn.after(data);
 				
 			if (data.band == 'false'){
 				console.log("Los datos del usuario no son válidos");
-			}
-		}, "json");
-	}
-	
-	this.add = function(usuario, fn){
-		if (fn.before !== undefined)
-			fn.before();
-			
-		$.post('cusuarios', {
-			"usuario": usuario,
-			"action": "add"
-		}, function(data){
-			if (fn.after != undefined)
-				fn.after(data);
-				
-			if (data.band == false){
-				console.log("Los datos del usuario no son válidos");
-			}
-		}, "json");
-	}
-	
-	this.del = function(usuario, fn){
-		if (fn.before !== undefined)
-			fn.before();
-			
-		$.post('cusuarios', {
-			"usuario": usuario,
-			"action": "del"
-		}, function(data){
-			if (fn.after != undefined)
-				fn.after(data);
-				
-			if (data.band == false){
-				console.log("Los datos del usuario no son válidos");
-			}
-		}, "json");
-	}
-	
-	this.setPerfil = function(usuario, perfil, fn){
-		if (fn.before !== undefined)
-			fn.before();
-			
-		$.post('cusuarios', {
-			"usuario": usuario,
-			"perfil": perfil, 
-			"action": "setPerfil"
-		}, function(data){
-			if (fn.after != undefined)
-				fn.after(data);
-				
-			if (data.band == false){
-				console.log("No se pudo asignar el perfil de usuario");
-			}
-		}, "json");
-	}
-	
-	this.addCuenta = function(datos){
-		if (datos.fn.before !== undefined)
-			datos.fn.before();
-			
-		$.post('cusuarios', {
-			"usuario": datos.usuario,
-			"cuenta": datos.cuenta,
-			"action": "addCuenta"
-		}, function(data){
-			if (datos.fn.after != undefined)
-				datos.fn.after(data);
-				
-			if (data.band == false){
-				console.log("No se pudo agregar la cuenta");
-			}
-		}, "json");
-	}
-	
-	this.delCuenta = function(datos){
-		if (datos.fn.before !== undefined)
-			datos.fn.before();
-			
-		$.post('cusuarios', {
-			"usuario": datos.usuario,
-			"cuenta": datos.cuenta,
-			"action": "delCuenta"
-		}, function(data){
-			if (datos.fn.after != undefined)
-				datos.fn.after(data);
-				
-			if (data.band == false){
-				console.log("No se pudo eliminar la cuenta");
 			}
 		}, "json");
 	}

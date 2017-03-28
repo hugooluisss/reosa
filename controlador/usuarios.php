@@ -6,12 +6,11 @@ switch($objModulo->getId()){
 		global $sesion;
 		$usuario = new TUsuario($sesion['usuario']);
 
-		$rs = $db->Execute("select * from tipoUsuario");
+		$rs = $db->query("select * from tipoUsuario");
 		
 		$datos = array();
-		while(!$rs->EOF){
-			$datos[$rs->fields['idTipoUsuario']] = $rs->fields['nombre'];
-			$rs->moveNext();
+		while($row = $rs->fetch_assoc()){
+			$datos[$row['idTipoUsuario']] = $row['nombre'];
 		}
 		
 		$smarty->assign("tipos", $datos);
@@ -20,24 +19,17 @@ switch($objModulo->getId()){
 		$db = TBase::conectaDB();
 		global $sesion;
 		$usuario = new TUsuario($sesion['usuario']);
-		$rs = $db->Execute("select * from usuario");
+		$rs = $db->query("select * from usuario where visible = true");
 		$datos = array();
-		while(!$rs->EOF){
-			$obj = new TUsuario($rs->fields['idUsuario']);
-			$rs->fields['tipo'] = $obj->getTipo();
-			$rs->fields['json'] = json_encode($rs->fields);
-			array_push($datos, $rs->fields);
-			$rs->moveNext();
+		while($row = $rs->fetch_assoc()){
+			$obj = new TUsuario($row['idUsuario']);
+			
+			$row['tipo'] = $obj->getTipo();
+			$row['json'] = json_encode($row);
+			
+			array_push($datos, $row);
 		}
 		$smarty->assign("lista", $datos);
-		
-		$rs = $db->Execute("select * from tipoUsuario");
-		$datos = array();
-		while(!$rs->EOF){
-			array_push($datos, $rs->fields);
-			$rs->moveNext();
-		}
-		$smarty->assign("tipoUsuario", $datos);
 	break;
 	case 'usuarioDatosPersonales':
 		global $sesion;
@@ -52,12 +44,13 @@ switch($objModulo->getId()){
 				$db = TBase::conectaDB();
 				$obj = new TUsuario();
 				
-				$rs = $db->Execute("select idUsuario from usuario where email = '".$_POST['email']."'");
+				$rs = $db->query("select idUsuario from usuario where clave = '".$_POST['clave']."'");
 				
-				if (!$rs->EOF){ #si es que encontró el email
-					if ($rs->fields["idUsuario"] <> $_POST['id']){
-						$obj->setId($rs->fields['idUsuario']);
-						echo json_encode(array("band" => false, "mensaje" => "El email ya se encuentra registrado con el usuario ".$obj->getNombreCompleto()));
+				if ($rs->num_rows > 0){ #si es que encontró la clave
+					$row = $rs->fetch_assoc();
+					if ($row["idUsuario"] <> $_POST['id']){
+						$obj->setId($row['idUsuario']);
+						echo json_encode(array("band" => false, "mensaje" => "La clave ya se encuentra registrada con el usuario ".$obj->getNombreCompleto()));
 						exit(1);
 					}
 				}
@@ -70,6 +63,7 @@ switch($objModulo->getId()){
 				$obj->setEmail($_POST['email']);
 				$obj->setPass($_POST['pass']);
 				$obj->setTipo($_POST['tipo']);
+				$obj->setClave($_POST['clave']);
 
 				echo json_encode(array("band" => $obj->guardar()));
 			break;

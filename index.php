@@ -24,8 +24,8 @@ date_default_timezone_set("America/Mexico_City");
 #librerias
 define('ADODB_ERROR_LOG_DEST','errors.log');
 define('ADODB_ERROR_LOG_TYPE',2);
-include('librerias/adodb/adodb-errorhandler.inc.php');
-include('librerias/adodb/adodb.inc.php');
+//include('librerias/adodb/adodb-errorhandler.inc.php');
+//include('librerias/adodb/adodb.inc.php');
 require_once('librerias/phpMailer/PHPMailerAutoload.php');
 require('librerias/fpdf/fpdf.php');
 require('librerias/fpdf/tfpdf.php');
@@ -50,15 +50,6 @@ if ($objModulo->requiereSeguridad()){
 }else
 	$bandSesion = isset($sesion['usuario']);
 
-/*	
-$pageSesion = new TUsuario($sesion['usuario']);
-if (!$objModulo->userCanSee($pageSesion->getIdTipo())){
-	$bandSesion = false;
-	unset($objModulo);
-	
-	$objModulo = new TModulo(MODULO_DEFECTO);
-}
-*/
 define("DIR_PLANTILLAS", 'templates');
 define('TEMPLATE', DIR_PLANTILLAS.'/plantillas/');
 define('CONFIG', 'librerias/smarty/repositorio/configs/');

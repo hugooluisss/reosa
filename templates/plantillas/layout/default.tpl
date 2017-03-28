@@ -36,7 +36,7 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	</head>
-	<body class="hold-transition skin-green-light sidebar-mini">
+	<body class="hold-transition skin-blue-light sidebar-mini">
 	<div class="wrapper">
 		<header class="main-header">
 			<!-- Logo -->
@@ -68,7 +68,7 @@
 									<img src="{$PAGE.ruta}img/logo.png" alt="User Image" style="background: white"/>
 									<p>
 										{$PAGE.usuario->getNombre()}
-										<small>{$PAGE.usuario->adscripcion->getNombre()}</small>
+										<small>{$PAGE.usuario->getTipo()}</small>
 									</p>
 								</li>
 								<!-- Menu Footer-->
@@ -103,26 +103,17 @@
 						</ul>
 					</li>
 					{/if}
+					
 					{if $PAGE.usuario->getPerfil() eq 1}
-					<li class="{if in_array($PAGE.modulo, array('bancos', 'regimen'))}active{/if} treeview">
+					<li class="{if in_array($PAGE.modulo, array('clientes'))}active{/if} treeview">
 						<a href="#">
 							<span>Catálogos</span> <i class="fa fa-angle-left pull-right"></i>
 						</a>
 						<ul class="treeview-menu">
-							<li {if $PAGE.modulo eq 'bancos'}class="active"{/if}><a href="bancos"><i class="fa fa-university" aria-hidden="true"></i> Bancos</a></li>
-							<li {if $PAGE.modulo eq 'regimen'}class="active"{/if}><a href="regimen"><i class="fa fa-file-text-o" aria-hidden="true"></i> Regimen de contratación</a></li>
-							<li {if $PAGE.modulo eq 'cuentas'}class="active"{/if}><a href="cuentas"><i class="fa fa-balance-scale" aria-hidden="true"></i> Cuentas</a></li>
+							<li {if $PAGE.modulo eq 'clientes'}class="active"{/if}><a href="clientes"><i class="fa fa-user"></i> Clientes</a></li>
 						</ul>
 					</li>
 					{/if}
-					<li class="{if in_array($PAGE.modulo, array('nomina'))}active{/if} treeview">
-						<a href="#">
-							<span>Nómina</span> <i class="fa fa-angle-left pull-right"></i>
-						</a>
-						<ul class="treeview-menu">
-							<li {if $PAGE.modulo eq 'nomina'}class="active"{/if}><a href="nomina"><i class="fa fa-table"></i> Panel</a></li>
-						</ul>
-					</li>
 				</ul>
 			</section>
 			<!-- /.sidebar -->

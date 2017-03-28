@@ -1,20 +1,21 @@
 <?php
 /**
-* TUsuario
-* Usuarios del sistema
+* TEquipo
+* Equipos de clientes
 * @package aplicacion
 * @autor Hugo Santiago hugooluisss@gmail.com
 **/
 
-class TUsuario{
-	private $idUsuario;
-	private $idTipo;
-	private $apellidos;
-	private $nombre;
-	private $email;
-	private $clave;
-	private $pass;
+class TEquipo{
+	private $idEquipo;
+	private $codigo;
+	private $tipo;
+	private $area;
+	private $marca;
+	private $modelo;
+	private $capacidad;
 	private $visible;
+	private $idCliente;
 	
 	/**
 	* Constructor de la clase
@@ -23,7 +24,7 @@ class TUsuario{
 	* @access public
 	* @param int $id identificador del objeto
 	*/
-	public function TUsuario($id = ''){
+	public function TEquipo($id = ''){
 		$this->setId($id);		
 		return true;
 	}
@@ -41,11 +42,10 @@ class TUsuario{
 		if ($id == '') return false;
 		
 		$db = TBase::conectaDB();
-		$rs = $db->query("select * from usuario where idUsuario = ".$id);
+		$rs = $db->query("select * from equipo where idEquipo = ".$id);
 		
-		foreach($rs->fetch_assoc() as $field => $val){
-			$this->$field = $val;
-		}
+		foreach($rs->fetch_assoc() as $field => $val)
+				$this->$field = $val;
 		
 		return true;
 	}
@@ -59,33 +59,47 @@ class TUsuario{
 	*/
 	
 	public function getId(){
-		return $this->idUsuario;
+		return $this->idEquipo;
 	}
 	
 	/**
-	* Establece el valor de tipo de usuario
+	* Establece el codigo
 	*
 	* @autor Hugo
 	* @access public
-	* @param string $val Valor a asignar por default es 2 que hace referencia a doctor
+	* @param string $val Valor a asignar
 	* @return boolean True si se realizó sin problemas
 	*/
 	
-	public function setTipo($val = 2){
-		$this->idTipo = $val;
+	public function setCodigo($val = ''){
+		$this->codigo = $val;
 		return true;
 	}
 	
 	/**
-	* Retorna las el identificador del tipo de usuario
+	* Retorna el codigo
 	*
 	* @autor Hugo
 	* @access public
 	* @return string Texto
 	*/
 	
-	public function getIdTipo(){
-		return $this->idTipo;
+	public function getCodigo(){
+		return $this->codigo;
+	}
+	
+	/**
+	* Establece el tipo
+	*
+	* @autor Hugo
+	* @access public
+	* @param string $val Valor a asignar
+	* @return boolean True si se realizó sin problemas
+	*/
+	
+	public function setTipo($val = ''){
+		$this->tipo = $val;
+		return true;
 	}
 	
 	/**
@@ -97,28 +111,11 @@ class TUsuario{
 	*/
 	
 	public function getTipo(){
-		if ($this->getIdTipo() == '') return false;
-		
-		$db = TBase::conectaDB();
-		$rs = $db->query("select nombre from tipoUsuario where idTipoUsuario = ".$this->getIdTipo());
-		$row = $rs->fetch_assoc();
-		return $row['nombre'];
+		return $this->tipo;
 	}
 	
 	/**
-	* Retorna el tipo como si fuera un perfil
-	*
-	* @autor Hugo
-	* @access public
-	* @return string Texto
-	*/
-	
-	public function getPerfil(){
-		return $this->getIdTipo();
-	}
-	
-	/**
-	* Establece los apellidos
+	* Establece el area
 	*
 	* @autor Hugo
 	* @access public
@@ -126,25 +123,25 @@ class TUsuario{
 	* @return boolean True si se realizó sin problemas
 	*/
 	
-	public function setApellidos($val = ''){
-		$this->apellidos = $val;
+	public function setArea($val = ''){
+		$this->area = $val;
 		return true;
 	}
 	
 	/**
-	* Retorna los apellidos
+	* Retorna el area
 	*
 	* @autor Hugo
 	* @access public
 	* @return string Texto
 	*/
 	
-	public function getApellidos(){
-		return $this->apellidos;
+	public function getArea(){
+		return $this->area;
 	}
 	
 	/**
-	* Establece el nombre
+	* Establece la marca
 	*
 	* @autor Hugo
 	* @access public
@@ -152,37 +149,25 @@ class TUsuario{
 	* @return boolean True si se realizó sin problemas
 	*/
 	
-	public function setNombre($val = ''){
-		$this->nombre = $val;
+	public function setMarca($val = ''){
+		$this->marca = $val;
 		return true;
 	}
 	
 	/**
-	* Retorna el nombre
+	* Retorna la marca
 	*
 	* @autor Hugo
 	* @access public
 	* @return string Texto
 	*/
 	
-	public function getNombre(){
-		return $this->nombre;
+	public function getMarca(){
+		return $this->marca;
 	}
 	
 	/**
-	* Retorna el nombre completo iniciando por nombre
-	*
-	* @autor Hugo
-	* @access public
-	* @return string Texto
-	*/
-	
-	public function getNombreCompleto(){
-		return $this->getNombre()." ".$this->getApellidos();
-	}
-	
-	/**
-	* Establece el email
+	* Establece el modelo
 	*
 	* @autor Hugo
 	* @access public
@@ -190,25 +175,25 @@ class TUsuario{
 	* @return boolean True si se realizó sin problemas
 	*/
 	
-	public function setEmail($val = ''){
-		$this->email = $val;
+	public function setModelo($val = ''){
+		$this->modelo = $val;
 		return true;
 	}
 	
 	/**
-	* Retorna el email
+	* Retorna el modelo
 	*
 	* @autor Hugo
 	* @access public
 	* @return string Texto
 	*/
 	
-	public function getEmail(){
-		return $this->email;
+	public function getModelo(){
+		return $this->modelo;
 	}
 	
 	/**
-	* Establece el valor del password
+	* Establece la capacidad
 	*
 	* @autor Hugo
 	* @access public
@@ -216,25 +201,25 @@ class TUsuario{
 	* @return boolean True si se realizó sin problemas
 	*/
 	
-	public function setPass($val = ''){
-		$this->pass = $val;
+	public function setCapacidad($val = ''){
+		$this->capacidad = $val;
 		return true;
 	}
 	
 	/**
-	* Retorna el password
+	* Retorna la capacidad
 	*
 	* @autor Hugo
 	* @access public
 	* @return string Texto
 	*/
 	
-	public function getPass(){
-		return $this->pass;
+	public function getCapacidad(){
+		return $this->capacidad;
 	}
 	
 	/**
-	* Establece la clave
+	* Establece el identificador del cliente
 	*
 	* @autor Hugo
 	* @access public
@@ -242,21 +227,21 @@ class TUsuario{
 	* @return boolean True si se realizó sin problemas
 	*/
 	
-	public function setClave($val = ''){
-		$this->clave = $val;
+	public function setCliente($val = ''){
+		$this->idCliente = $val;
 		return true;
 	}
 	
 	/**
-	* Retorna la clave
+	* Retorna el identificador del cliente
 	*
 	* @autor Hugo
 	* @access public
 	* @return string Texto
 	*/
 	
-	public function getClave(){
-		return $this->clave;
+	public function getCliente(){
+		return $this->idCliente;
 	}
 	
 	/**
@@ -268,29 +253,27 @@ class TUsuario{
 	*/
 	
 	public function guardar(){
-		if ($this->getIdTipo() == '') return false;
-		
 		$db = TBase::conectaDB();
 		
 		if ($this->getId() == ''){
-			$rs = $db->query("INSERT INTO usuario(idTipo, visible) VALUES(".$this->getIdTipo().", true);");
+			$rs = $db->query("INSERT INTO equipo(idCliente, codigo) VALUES('".$this->getCliente()."', '".$this->getCodigo()."');");
 			if (!$rs) return false;
 				
-			$this->idUsuario = $db->insert_id;
-		}		
-		
+			$this->idEquipo = $db->insert_id;
+		}
+
 		if ($this->getId() == '')
 			return false;
 			
-		$rs = $db->query("UPDATE usuario
+		$rs = $db->query("UPDATE equipo
 			SET
-				idTipo = ".$this->getIdTipo().",
-				nombre = '".$this->getNombre()."',
-				apellidos = '".$this->getApellidos()."',
-				email = '".$this->getEmail()."',
-				pass = '".$this->getPass()."',
-				clave = '".$this->getClave()."'
-			WHERE idUsuario = ".$this->getId());
+				codigo = '".$this->getCodigo()."',
+				tipo = '".$this->getTipo()."',
+				area = '".$this->getArea()."',
+				marca = '".$this->getMarca()."',
+				modelo = '".$this->getModelo()."',
+				capacidad = '".$this->getCapacidad()."'
+			WHERE idEquipo = ".$this->getId());
 			
 		return $rs?true:false;
 	}
@@ -307,7 +290,7 @@ class TUsuario{
 		if ($this->getId() == '') return false;
 		
 		$db = TBase::conectaDB();
-		$rs = $db->query("update usuario set visible = false where idUsuario = ".$this->getId());
+		$rs = $db->query("update equipo set visible = false where idEquipo = ".$this->getId());
 		
 		return $rs?true:false;
 	}
