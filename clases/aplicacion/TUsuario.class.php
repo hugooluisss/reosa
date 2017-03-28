@@ -12,7 +12,9 @@ class TUsuario{
 	private $apellidos;
 	private $nombre;
 	private $email;
+	private $admin
 	private $pass;
+	private $visible;
 	
 	/**
 	* Constructor de la clase
@@ -218,6 +220,32 @@ class TUsuario{
 	}
 	
 	/**
+	* Establece la clave
+	*
+	* @autor Hugo
+	* @access public
+	* @param string $val Valor a asignar
+	* @return boolean True si se realizó sin problemas
+	*/
+	
+	public function setClave($val = ''){
+		$this->clave = $val;
+		return true;
+	}
+	
+	/**
+	* Retorna la clave
+	*
+	* @autor Hugo
+	* @access public
+	* @return string Texto
+	*/
+	
+	public function getClave(){
+		return $this->clave;
+	}
+	
+	/**
 	* Guarda los datos en la base de datos, si no existe un identificador entonces crea el objeto
 	*
 	* @autor Hugo
@@ -231,7 +259,7 @@ class TUsuario{
 		$db = TBase::conectaDB();
 		
 		if ($this->getId() == ''){
-			$rs = $db->Execute("INSERT INTO usuario(idTipo) VALUES(".$this->getIdTipo().");");
+			$rs = $db->Execute("INSERT INTO usuario(idTipo, visible) VALUES(".$this->getIdTipo().", true);");
 			if (!$rs) return false;
 				
 			$this->idUsuario = $db->Insert_ID();
@@ -246,7 +274,8 @@ class TUsuario{
 				nombre = '".$this->getNombre()."',
 				apellidos = '".$this->getApellidos()."',
 				email = '".$this->getEmail()."',
-				pass = '".$this->getPass()."'
+				pass = '".$this->getPass()."',
+				clave = '".$this->getClave()."'
 			WHERE idUsuario = ".$this->getId());
 			
 		return $rs?true:false;
