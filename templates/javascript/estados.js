@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$('#txtColor').colorpicker();
 	getLista();
 	
 	$("#panelTabs li a[href=#add]").click(function(){
@@ -15,41 +16,43 @@ $(document).ready(function(){
 		debug: true,
 		rules: {
 			txtNombre: "required",
-			},
+			txtColor: "required",
+		},
 		wrapper: 'span', 
+		messages: {
+			txtNombre: "Este campo es necesario",
+			txtColor: "Este campo es necesario",
+		},
 		submitHandler: function(form){
-		
-			var obj = new TCliente;
-			obj.add({
-				id: $("#id").val(), 
-				nombre: $("#txtNombre").val(), 
-				direccion: $("#txtDireccion").val(),
-				ciudad: $("#txtCiudad").val(),
-				colonia: $("#txtColonia").val(),
-				fn: {
+			var obj = new TEstado;
+			obj.add(
+				$("#id").val(), 
+				$("#txtNombre").val(),
+				$("#txtColor").val(),
+				{
 					after: function(datos){
 						if (datos.band){
 							getLista();
 							$("#frmAdd").get(0).reset();
 							$('#panelTabs a[href="#listas"]').tab('show');
 						}else{
-							alert("Upps... No se pudo guardar");
+							alert("Upps... " + datos.mensaje);
 						}
 					}
 				}
-			});
+			);
         }
 
     });
 		
 	function getLista(){
-		$.get("listaClientes", function( data ) {
+		$.get("listaEstados", function( data ) {
 			$("#dvLista").html(data);
 			
 			$("[action=eliminar]").click(function(){
 				if(confirm("¿Seguro?")){
-					var obj = new TCliente;
-					obj.del($(this).attr("identificador"), {
+					var obj = new TEstado;
+					obj.del($(this).attr("item"), {
 						after: function(data){
 							getLista();
 						}
@@ -60,31 +63,21 @@ $(document).ready(function(){
 			$("[action=modificar]").click(function(){
 				var el = jQuery.parseJSON($(this).attr("datos"));
 				
-				$("#id").val(el.idCliente);
+				$("#id").val(el.idEstado);
 				$("#txtNombre").val(el.nombre);
-				$("#txtDireccion").val(el.direccion);
-				$("#txtCiudad").val(el.ciudad);
-				$("#txtColonia").val(el.colonia);
+				$("#txtColor").val(el.color);
 				$('#panelTabs a[href="#add"]').tab('show');
 			});
 			
-			$("[action=equipos]").click(function(){
-				var el = jQuery.parseJSON($(this).attr("datos"));
-				
-				$("#winEquipos").attr("data", $(this).attr("datos"));
-				$("#winEquipos").modal();
-				
-			});
-			
-			$("#tblDatos").DataTable({
+			$("#tblEstados").DataTable({
 				"responsive": true,
 				"language": espaniol,
-				"paging": true,
+				"paging": false,
 				"lengthChange": false,
 				"ordering": true,
 				"info": true,
 				"autoWidth": false
 			});
 		});
-	}
+	};
 });

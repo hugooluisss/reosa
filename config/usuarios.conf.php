@@ -21,5 +21,5 @@ $conf['cusuarios'] = array(
 	'controlador' => 'usuarios.php',
 	'descripcion' => 'Controlador de usuarios',
 	'seguridad' => true,
-	'capa' => LAYOUT_AJAX);
+	'capa' => LAYOUT_JSON);
 ?>

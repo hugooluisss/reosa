@@ -14,23 +14,26 @@ $(document).ready(function(){
 	$("#frmAdd").validate({
 		debug: true,
 		rules: {
-			txtEmail: "required",
-			txtPass: "required",
-			txtClave: "required"
+			selEquipo: "required",
+			txtFecha: "required",
+			selEstado: "required",
+			txtSolicitante: "required"
 		},
-		wrapper: 'span', 
+		wrapper: 'span',
 		submitHandler: function(form){
-		
-			var obj = new TUsuario;
+			var obj = new TOrden;
 			obj.add({
-				id: $("#id").val(), 
-				nombre: $("#txtNombre").val(), 
-				apellidos: $("#txtApellidos").val(),
-				email: $("#txtEmail").val(),
-				pass: $("#txtPass").val(),
-				tipo:$("#selTipo").val(),
-				clave:$("#txtClave").val(),
-				fn: {
+				"id": $("#id").val(),
+				"estado": $("#selEstado").val(),
+				"equipo": $("#selEquipo").val(),
+				"fecha": $("#txtFecha").val(), 
+				"solicitante": $("#txtSolicitante").val(),
+				"falla": $("#txtFalla").val(),
+				"servicio": $("#txtServicio").val(),
+				"materiales": $("#txtMateriales").val(),
+				"comentarios": $("#txtComentarios").val(),
+				"asignado": $("#selAsignado").val(),
+				fn:{
 					after: function(datos){
 						if (datos.band){
 							getLista();
@@ -47,13 +50,13 @@ $(document).ready(function(){
     });
 		
 	function getLista(){
-		$.get("listaUsuarios", function( data ) {
+		$.get("listaOrdenes", function( data ) {
 			$("#dvLista").html(data);
 			
 			$("[action=eliminar]").click(function(){
 				if(confirm("¿Seguro?")){
-					var obj = new TUsuario;
-					obj.del($(this).attr("usuario"), {
+					var obj = new TOrden;
+					obj.del($(this).attr("item"), {
 						after: function(data){
 							getLista();
 						}
@@ -64,25 +67,29 @@ $(document).ready(function(){
 			$("[action=modificar]").click(function(){
 				var el = jQuery.parseJSON($(this).attr("datos"));
 				
-				$("#id").val(el.idUsuario);
-				$("#txtNombre").val(el.nombre);
-				$("#txtApellidos").val(el.apellidos);
-				$("#txtEmail").val(el.email);
-				$("#txtPass").val(el.pass);
-				$("#selTipo").val(el.idTipo);
-				$("#txtClave").val(el.clave);
+				$("#id").val(el.idEstado);
+				$("#selEstado").val(el.idEstado);
+				$("#selEquipo").val(el.idEquipo);
+				$("#txtFecha").val(el.fecha);
+				$("#selSolicitante").val(el.solicitante);
+				$("#txtFalla").val(el.falla);
+				$("#txtServicio").val(el.servicio);
+				$("#txtMateriales").val(el.materiales);
+				$("#txtComentarios").val(el.comentarios);
+				$("#selAsignado").val(el.asignado);
+				
 				$('#panelTabs a[href="#add"]').tab('show');
 			});
 			
-			$("#tblUsuarios").DataTable({
+			$("#tblDatos").DataTable({
 				"responsive": true,
 				"language": espaniol,
-				"paging": true,
+				"paging": false,
 				"lengthChange": false,
 				"ordering": true,
 				"info": true,
 				"autoWidth": false
 			});
 		});
-	}
+	};
 });

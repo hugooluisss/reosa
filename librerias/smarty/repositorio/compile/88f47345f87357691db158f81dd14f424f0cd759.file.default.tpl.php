@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-03-28 12:04:44
+<?php /* Smarty version Smarty-3.1.11, created on 2017-03-28 23:57:28
          compiled from "templates/plantillas/layout/default.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:821989458da8e89621694-53815234%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '88f47345f87357691db158f81dd14f424f0cd759' => 
     array (
       0 => 'templates/plantillas/layout/default.tpl',
-      1 => 1490724282,
+      1 => 1490767046,
       2 => 'file',
     ),
   ),
@@ -153,12 +153,25 @@ img/logo.png" alt="User Image" style="background: white"/>
 					<?php }?>
 					
 					<?php if ($_smarty_tpl->tpl_vars['PAGE']->value['usuario']->getPerfil()==1){?>
-					<li class="<?php if (in_array($_smarty_tpl->tpl_vars['PAGE']->value['modulo'],array('clientes'))){?>active<?php }?> treeview">
+					<li class="<?php if (in_array($_smarty_tpl->tpl_vars['PAGE']->value['modulo'],array('clientes','estados'))){?>active<?php }?> treeview">
 						<a href="#">
 							<span>Catálogos</span> <i class="fa fa-angle-left pull-right"></i>
 						</a>
 						<ul class="treeview-menu">
 							<li <?php if ($_smarty_tpl->tpl_vars['PAGE']->value['modulo']=='clientes'){?>class="active"<?php }?>><a href="clientes"><i class="fa fa-user"></i> Clientes</a></li>
+							<li <?php if ($_smarty_tpl->tpl_vars['PAGE']->value['modulo']=='estados'){?>class="active"<?php }?>><a href="estados"><i class="fa fa-certificate" aria-hidden="true"></i>
+ Estados</a></li>
+						</ul>
+					</li>
+					<?php }?>
+					
+					<?php if (in_array($_smarty_tpl->tpl_vars['PAGE']->value['usuario']->getPerfil(),array(1,2))){?>
+					<li class="<?php if (in_array($_smarty_tpl->tpl_vars['PAGE']->value['modulo'],array('ordenes'))){?>active<?php }?> treeview">
+						<a href="#">
+							<span>Ordenes</span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li <?php if ($_smarty_tpl->tpl_vars['PAGE']->value['modulo']=='ordenes'){?>class="active"<?php }?>><a href="ordenes"><i class="fa fa-file-o"></i> Listar</a></li>
 						</ul>
 					</li>
 					<?php }?>

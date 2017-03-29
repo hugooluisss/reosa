@@ -21,5 +21,5 @@ $conf['cclientes'] = array(
 	'controlador' => 'clientes.php',
 	'descripcion' => 'Controlador de clientes',
 	'seguridad' => true,
-	'capa' => LAYOUT_AJAX);
+	'capa' => LAYOUT_JSON);
 ?>

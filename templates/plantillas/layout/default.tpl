@@ -105,12 +105,25 @@
 					{/if}
 					
 					{if $PAGE.usuario->getPerfil() eq 1}
-					<li class="{if in_array($PAGE.modulo, array('clientes'))}active{/if} treeview">
+					<li class="{if in_array($PAGE.modulo, array('clientes', 'estados'))}active{/if} treeview">
 						<a href="#">
 							<span>Catálogos</span> <i class="fa fa-angle-left pull-right"></i>
 						</a>
 						<ul class="treeview-menu">
 							<li {if $PAGE.modulo eq 'clientes'}class="active"{/if}><a href="clientes"><i class="fa fa-user"></i> Clientes</a></li>
+							<li {if $PAGE.modulo eq 'estados'}class="active"{/if}><a href="estados"><i class="fa fa-certificate" aria-hidden="true"></i>
+ Estados</a></li>
+						</ul>
+					</li>
+					{/if}
+					
+					{if in_array($PAGE.usuario->getPerfil(), array(1, 2))}
+					<li class="{if in_array($PAGE.modulo, array('ordenes'))}active{/if} treeview">
+						<a href="#">
+							<span>Ordenes</span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li {if $PAGE.modulo eq 'ordenes'}class="active"{/if}><a href="ordenes"><i class="fa fa-file-o"></i> Listar</a></li>
 						</ul>
 					</li>
 					{/if}

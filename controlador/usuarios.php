@@ -64,12 +64,12 @@ switch($objModulo->getId()){
 				$obj->setPass($_POST['pass']);
 				$obj->setTipo($_POST['tipo']);
 				$obj->setClave($_POST['clave']);
-
-				echo json_encode(array("band" => $obj->guardar()));
+				
+				$smarty->assign("json", array("band" => $obj->guardar()));
 			break;
 			case 'del':
 				$obj = new TUsuario($_POST['usuario']);
-				echo json_encode(array("band" => $obj->eliminar()));
+				$smarty->assign("json", array("band" => $obj->eliminar()));
 			break;
 			case 'saveDatosPersonales':
 				global $sesion;
@@ -79,7 +79,7 @@ switch($objModulo->getId()){
 				$obj->setNombre($_POST['nombre']);
 				$obj->setApellidos($_POST['apellidos']);
 				
-				echo json_encode(array("band" => $obj->guardar()));
+				$smarty->assign("json", array("band" => $obj->guardar()));
 			break;
 			case 'savePassword':
 				global $sesion;
@@ -88,7 +88,7 @@ switch($objModulo->getId()){
 				$obj->setId($sesion['usuario']);
 				$obj->setPass($_POST['pass']);
 				
-				echo json_encode(array("band" => $obj->guardar()));
+				$smarty->assign("json", array("band" => $obj->guardar()));
 			break;
 		}
 	break;

@@ -12,5 +12,5 @@ $conf['cequipos'] = array(
 	'controlador' => 'equipos.php',
 	'descripcion' => 'Controlador de equipos',
 	'seguridad' => true,
-	'capa' => LAYOUT_AJAX);
+	'capa' => LAYOUT_JSON);
 ?>

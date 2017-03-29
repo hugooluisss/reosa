@@ -30,7 +30,7 @@ switch($objModulo->getId()){
 				$obj->setModelo($_POST['modelo']);
 				$obj->setCapacidad($_POST['capacidad']);
 
-				echo json_encode(array("band" => $obj->guardar()));
+				$smarty->assign("json", array("band" => $obj->guardar()));
 			break;
 			case 'del':
 				$obj = new TEquipo($_POST['id']);
@@ -38,7 +38,7 @@ switch($objModulo->getId()){
 			break;
 			case 'validaCodigo':
 				$db = TBase::conectaDB();
-				$rs = $db->query("select idEquipo from equipo where codigo = '".$_POST['txtCodigo']."' and not idCliente = '".$_POST['id']."'");
+				$rs = $db->query("select idEquipo from equipo where codigo = '".$_POST['txtCodigo']."' and not idEquipo = '".$_POST['id']."'");
 				
 				echo $rs->num_rows == 0?"true":"false";
 			break;
