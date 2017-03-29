@@ -37,4 +37,17 @@ TEquipo = function(){
 			}
 		}, "json");
 	};
+	
+	this.getLista = function(cliente, fn){
+		if (fn.before != undefined)
+			fn.before();
+			
+		$.post('cequipos', {
+			"cliente": cliente,
+			"action": "getLista"
+		}, function(data){
+			if (fn.after != undefined)
+				fn.after(data);
+		}, "json");
+	}
 };

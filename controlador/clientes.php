@@ -30,6 +30,17 @@ switch($objModulo->getId()){
 				$obj = new TCliente($_POST['id']);
 				$smarty->assign("json", array("band" => $obj->eliminar()));
 			break;
+			case 'getLista':
+				$db = TBase::conectaDB();
+				$rs = $db->query("select * from cliente where visible = true");
+				$datos = array();
+				while($row = $rs->fetch_assoc()){
+					$row['json'] = json_encode($row);
+					
+					array_push($datos, $row);
+				}
+				$smarty->assign("json", $datos);
+			break;
 		}
 	break;
 }

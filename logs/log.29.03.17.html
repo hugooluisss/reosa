@@ -1,0 +1,51 @@
+<b style="color:GREEN;">ERROR DEL SISTEMA</b><strong> Error en la linea <span style="color:BLUE">0</span> del archivo <span style="color:BLUE">Desconocido - MOD: cordenes,</span> el dia <span style="color:BLUE">29/03/2017 13:03,</span><br /></strong><strong><p>El mensaje Mandado es :</p></strong>Incorrect integer value: '' for column 'chequeoCargaRefrigerante' at row 1 en UPDATE orden
+			SET
+				idEstado = 1,
+				idEquipo = 2,
+				fecha = '2017-03-29',
+				solicitante = 'yomero',
+				falla = '',
+				servicio = 'ajam',
+				materiales = '',
+				comentarios = '',
+				asignado = '',
+				limpiezaCarcasa = '0',
+				limpiezaPartesElectricas = '0',
+				limpiezaSerpentinCondensador = '0',
+				limpiezaSerpentinEvaporador = '0',
+				chequeoCargaRefrigerante = '',
+				chequeoElectricoConexiones = '0',
+				succion = '', 
+				descarga = '',
+				aceite = '',
+				paroBaja = '',
+				paroAlta = '',
+				arranque = '',
+				dentroCamara = '',
+				aguaEntrada = '',
+				aguaSalida = '',
+				aireInyeccion = '',
+				aireRetorno = '',
+				ambiente = '',
+				compresor = 'Array',
+				evaporador = 'Array',
+				condensador = 'Array'
+			WHERE idOrden = 11<br /><hr>
+<b style="color:GREEN;">ERROR DEL SISTEMA</b><strong> Error en la linea <span style="color:BLUE">0</span> del archivo <span style="color:BLUE">MySQL - MOD: listaOrdenes,</span> el dia <span style="color:BLUE">29/03/2017 13:03,</span><br /></strong><strong><p>El mensaje Mandado es :</p></strong>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.nombre as cliente
+			from orden a join estado b using(idEstado)
+				join equipo' at line 2<br /><hr>
+<b style="color:GREEN;">ERROR DEL SISTEMA</b><strong> Error en la linea <span style="color:BLUE">0</span> del archivo <span style="color:BLUE">MySQL - MOD: listaOrdenes,</span> el dia <span style="color:BLUE">29/03/2017 13:03,</span><br /></strong><strong><p>El mensaje Mandado es :</p></strong>You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.nombre as cliente
+			from orden a join estado b using(idEstado)
+				join equipo' at line 2 en select a.*, b.nombre as estado, b.color
+				d.nombre as cliente
+			from orden a join estado b using(idEstado)
+				join equipo c using(idEquipo)
+				join cliente d using(idCliente) 
+			where visible = true<br /><hr>
+<b style="color:GREEN;">ERROR DEL SISTEMA</b><strong> Error en la linea <span style="color:BLUE">0</span> del archivo <span style="color:BLUE">MySQL - MOD: listaOrdenes,</span> el dia <span style="color:BLUE">29/03/2017 13:03,</span><br /></strong><strong><p>El mensaje Mandado es :</p></strong>Column 'visible' in where clause is ambiguous en 
+select a.*, b.nombre as estado, b.color,
+				d.nombre as cliente
+			from orden a join estado b using(idEstado)
+				join equipo c using(idEquipo)
+				join cliente d using(idCliente) 
+			where visible = true<br /><hr>

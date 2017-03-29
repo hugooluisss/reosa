@@ -14,7 +14,7 @@
 					<tr>
 						<td style="border-left: 2px solid {$row.color}">{$row.fecha}</td>
 						<td>{$row.cliente}</td>
-						<td>{$row.nombreEstado}</td>
+						<td><span style="color: {$row.color}">{$row.estado}</span></td>
 						<td style="text-align: right">
 							<button type="button" class="btn btn-success" action="modificar" title="Modificar" datos='{$row.json}'><i class="fa fa-pencil"></i></button>
 							{if $row.eliminar eq 1}

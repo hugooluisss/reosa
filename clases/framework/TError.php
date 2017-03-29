@@ -122,5 +122,9 @@ function ErrorSistema($texto){
 	gestorErrores(257, $texto, 'Desconocido', 0, 'asdf');
 }
 
+function ErrorMysql($db, $sql){
+	gestorErrores(257, $db->error." en ".PHP_EOL.$sql, 'MySQL', 0, 'asdf');
+}
+
 set_error_handler("gestorErrores");
 ?>

@@ -42,6 +42,17 @@ switch($objModulo->getId()){
 				
 				echo $rs->num_rows == 0?"true":"false";
 			break;
+			case 'getLista':
+				$db = TBase::conectaDB();
+				$rs = $db->query("select * from equipo where idCliente = ".$_POST['cliente']." and visible = true");
+				$datos = array();
+				while($row = $rs->fetch_assoc()){
+					$row['json'] = json_encode($row);
+					
+					array_push($datos, $row);
+				}
+				$smarty->assign("json", $datos);
+			break;
 		}
 	break;
 }

@@ -22,6 +22,9 @@ TCliente = function(){
 	
 	
 	this.del = function(id, fn){
+		if (fn.before != undefined)
+			fn.before(data);
+				
 		$.post('cclientes', {
 			"id": id,
 			"action": "del"
@@ -34,4 +37,16 @@ TCliente = function(){
 			}
 		}, "json");
 	};
+	
+	this.getLista = function(fn){
+		if (fn.before != undefined)
+			fn.before();
+			
+		$.post('cclientes', {
+			"action": "getLista"
+		}, function(data){
+			if (fn.after != undefined)
+				fn.after(data);
+		}, "json");
+	}
 };
