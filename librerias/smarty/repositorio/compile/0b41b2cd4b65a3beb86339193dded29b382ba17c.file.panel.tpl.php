@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-03-29 13:40:33
+<?php /* Smarty version Smarty-3.1.11, created on 2017-03-30 10:18:59
          compiled from "templates/plantillas/modulos/ordenes/panel.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:28833802658db4cf81118b3-65111044%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0b41b2cd4b65a3beb86339193dded29b382ba17c' => 
     array (
       0 => 'templates/plantillas/modulos/ordenes/panel.tpl',
-      1 => 1490816383,
+      1 => 1490890695,
       2 => 'file',
     ),
   ),
@@ -21,6 +21,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   array (
     'estados' => 0,
     'row' => 0,
+    'vendedores' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -87,6 +88,23 @@ $_smarty_tpl->tpl_vars["row"]->_loop = true;
 						<label for="txtSolicitante" class="col-sm-2">Persona solicitante del servicio</label>
 						<div class="col-sm-10">
 							<input class="form-control" id="txtSolicitante" name="txtSolicitante">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="selCliente" class="col-sm-2">Asignado</label>
+						<div class="col-sm-10">
+							<select id="selAsignado" name="selAsignado" class="form-control">
+								<option value="">Sin asignar</option>
+								<?php  $_smarty_tpl->tpl_vars["row"] = new Smarty_Variable; $_smarty_tpl->tpl_vars["row"]->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['vendedores']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars["row"]->key => $_smarty_tpl->tpl_vars["row"]->value){
+$_smarty_tpl->tpl_vars["row"]->_loop = true;
+?>
+									<option value="<?php echo $_smarty_tpl->tpl_vars['row']->value['nombre'];?>
+"><?php echo $_smarty_tpl->tpl_vars['row']->value['nombre'];?>
+</option>
+								<?php } ?>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">

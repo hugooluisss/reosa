@@ -12,6 +12,15 @@ switch($objModulo->getId()){
 			array_push($datos, $row);
 		}
 		$smarty->assign("estados", $datos);
+		
+		$rs = $db->query("select concat(nombre, ' ', apellidos) as nombre from usuario where idTipo = 2 and visible = true");
+		$datos = array();
+		while($row = $rs->fetch_assoc()){
+			$row['json'] = json_encode($row);
+			
+			array_push($datos, $row);
+		}
+		$smarty->assign("vendedores", $datos);
 	break;
 	case 'listaOrdenes':
 		$db = TBase::conectaDB();
@@ -58,7 +67,7 @@ switch($objModulo->getId()){
 				$obj->setAceite($_POST['aceite']);
 				$obj->setParoBaja($_POST['paroBaja']);
 				$obj->setParoAlta($_POST['paroAlta']);
-				$obj->setArranque($_POST['paroArranque']);
+				$obj->setArranque($_POST['arranque']);
 				$obj->setDentroCamara($_POST['dentroCamara']);
 				$obj->setAguaEntrada($_POST['aguaEntrada']);
 				$obj->setAguaSalida($_POST['aguaSalida']);

@@ -42,7 +42,7 @@ $(document).ready(function(){
 				"equipo": $("#selEquipo").val(),
 				"fecha": $("#txtFecha").val(), 
 				"solicitante": $("#txtSolicitante").val(),
-				"falla": $("#txtFalla").val(),
+				"falla": $("#txtFallas").val(),
 				"servicio": $("#txtServicio").val(),
 				"materiales": $("#txtMateriales").val(),
 				"comentarios": $("#txtComentarios").val(),
@@ -142,12 +142,79 @@ $(document).ready(function(){
 				$("#selEstado").val(el.idEstado);
 				$("#selEquipo").val(el.idEquipo);
 				$("#txtFecha").val(el.fecha);
-				$("#selSolicitante").val(el.solicitante);
-				$("#txtFalla").val(el.falla);
+				$("#txtSolicitante").val(el.solicitante);
+				$("#txtFallas").val(el.falla);
 				$("#txtServicio").val(el.servicio);
 				$("#txtMateriales").val(el.materiales);
 				$("#txtComentarios").val(el.comentarios);
 				$("#selAsignado").val(el.asignado);
+				
+				$("#selLimpiezaCarcasa").val(el.limpiezaCarcasa);
+				$("#selLimpiezaPartesElectricas").val(el.limpiezaPartesElectricas);
+				$("#selLimpiezaSerpentinCondensador").val(el.limpiezaSerpentinCondensador)
+				$("#selLimpiezaSerpentinEvaporador").val(el.limpiezaSerpentinEvaporador);
+				$("#selChequeoCargaRefrigerante").val(el.chequeoCargaRefrigerante);
+				$("#selChequeoElectricoConexiones").val(el.chequeoElectricoConexiones);
+				$("#txtSuccion").val(el.succion);
+				$("#txtDescarga").val(el.descarga);
+				$("#txtAceite").val(el.aceite);
+				$("#txtParoBaja").val(el.paroBaja);
+				$("#txtParoAlta").val(el.paroAlta);
+				$("#txtArranque").val(el.arranque);
+				$("#txtDentroCamara").val(el.dentroCamara);
+				$("#txtAguaEntrada").val(el.aguaEntrada);
+				$("#txtAguaSalida").val(el.aguaSalida);
+				$("#txtAireInyeccion").val(el.aireInyeccion);
+				$("#txtAireRetorno").val(el.aireRetorno);
+				$("#txtAmbiente").val(el.ambiente);
+				
+				try{
+					var compresor = jQuery.parseJSON(el.compresor);
+					$("#txtCompresorHP").val(compresor.hp);
+					$("#txtCompresorFases").val(compresor.fases);
+					$("#txtCompresorCantidad").val(compresor.cantidad);
+					$("#txtCompresorAmp").val(compresor.placa);
+					$("#txtCompresorL1").val(compresor.l1);
+					$("#txtCompresorL2").val(compresor.l2);
+					$("#txtCompresorL3").val(compresor.l3)
+					$("#txtCompresorL1L2").val(compresor.l1l2);
+					$("#txtCompresorL1L3").val(compresor.l1l3);
+					$("#txtCompresorL2L3").val(compresor.l2l3);
+				}catch(err){
+					console.log("Compresor no era un JSON");
+				}
+				
+				try{
+					var evaporador = jQuery.parseJSON(el.evaporador);
+					$("#txtEvaporadorHP").val(evaporador.hp);
+					$("#txtEvaporadorFases").val(evaporador.fases);
+					$("#txtEvaporadorCantidad").val(evaporador.cantidad);
+					$("#txtEvaporadorAmp").val(evaporador.placa);
+					$("#txtEvaporadorL1").val(evaporador.l1);
+					$("#txtEvaporadorL2").val(evaporador.l2);
+					$("#txtEvaporadorL3").val(evaporador.l3)
+					$("#txtEvaporadorL1L2").val(evaporador.l1l2);
+					$("#txtEvaporadorL1L3").val(evaporador.l1l3);
+					$("#txtEvaporadorL2L3").val(evaporador.l2l3);
+				}catch(err){
+					console.log("Evaporador no era un JSON");
+				}
+				
+				try{
+					var condensador = jQuery.parseJSON(el.condensador);
+					$("#txtCondensadorHP").val(condensador.hp);
+					$("#txtCondensadorFases").val(condensador.fases);
+					$("#txtCondensadorCantidad").val(condensador.cantidad);
+					$("#txtCondensadorAmp").val(condensador.placa);
+					$("#txtCondensadorL1").val(condensador.l1);
+					$("#txtCondensadorL2").val(condensador.l2);
+					$("#txtCondensadorL3").val(condensador.l3)
+					$("#txtCondensadorL1L2").val(condensador.l1l2);
+					$("#txtCondensadorL1L3").val(condensador.l1l3);
+					$("#txtCondensadorL2L3").val(condensador.l2l3);
+				}catch(e){
+					console.log("Condensador no era un JSON");
+				}
 				
 				$('#panelTabs a[href="#add"]').tab('show');
 			});

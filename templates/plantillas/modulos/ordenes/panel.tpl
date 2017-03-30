@@ -58,6 +58,17 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="selCliente" class="col-sm-2">Asignado</label>
+						<div class="col-sm-10">
+							<select id="selAsignado" name="selAsignado" class="form-control">
+								<option value="">Sin asignar</option>
+								{foreach from=$vendedores item="row"}
+									<option value="{$row.nombre}">{$row.nombre}</option>
+								{/foreach}
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="txtFallas" class="col-sm-2">Fallas encontradas</label>
 						<div class="col-sm-4">
 							<textarea class="form-control" rows="5" id="txtFallas" name="txtFallas"></textarea>
