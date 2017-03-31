@@ -46,7 +46,7 @@
 				</p>
 				<form action="#" id="frmLogin" method="post">
 					<div class="form-group has-feedback">
-						<input type="text" class="form-control" placeholder="Clave" id="txtUsuario" name="txtUsuario">
+						<input type="text" class="form-control" placeholder="Usuario" id="txtUsuario" name="txtUsuario">
 						<span class="glyphicon glyphicon-user form-control-feedback"></span>
 					</div>
 					<div class="form-group has-feedback">

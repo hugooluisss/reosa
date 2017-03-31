@@ -20,10 +20,16 @@
 		<form role="form" id="frmAdd" class="form-horizontal" onsubmit="javascript: return false;">
 			<div class="box">
 				<div class="box-body">			
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label for="txtFecha" class="col-sm-2">Fecha</label>
 						<div class="col-sm-2">
 							<input class="form-control" id="txtFecha" name="txtFecha">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="txtFolio" class="col-sm-2">Folio</label>
+						<div class="col-sm-2">
+							<input class="form-control" id="txtFolio" name="txtFolio" disabled="true" readonly="true">
 						</div>
 					</div>
 					<div class="form-group">
@@ -324,3 +330,5 @@
 		</form>
 	</div>
 </div>
+
+{include file=$PAGE.rutaModulos|cat:"modulos/fotos/winPanel.tpl"}

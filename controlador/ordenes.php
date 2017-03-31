@@ -25,12 +25,22 @@ switch($objModulo->getId()){
 	case 'listaOrdenes':
 		$db = TBase::conectaDB();
 		global $sesion;
-		$sql = "select a.*, b.nombre as estado, b.color,
-				d.nombre as cliente
-			from orden a join estado b using(idEstado)
-				join equipo c using(idEquipo)
-				join cliente d using(idCliente) 
-			where a.visible = true";
+		global $userSesion;
+		
+		if ($userSesion->getTipo() == 1)
+			$sql = "select a.*, b.nombre as estado, b.color,
+					d.nombre as cliente
+				from orden a join estado b using(idEstado)
+					join equipo c using(idEquipo)
+					join cliente d using(idCliente) 
+				where a.visible = true";
+		else
+			$sql = "select a.*, b.nombre as estado, b.color,
+					d.nombre as cliente
+				from orden a join estado b using(idEstado)
+					join equipo c using(idEquipo)
+					join cliente d using(idCliente) 
+				where a.visible = true and idUsuario = ".$userSesion->getId();
 			
 		$rs = $db->query($sql) or errorMySQL($db, $sql);
 		$datos = array();
@@ -44,18 +54,25 @@ switch($objModulo->getId()){
 	case 'cordenes':
 		switch($objModulo->getAction()){
 			case 'add':
+				global $userSesion;
 				$obj = new TOrden();
 				
 				$obj->setId($_POST['id']);
 				$obj->equipo->setId($_POST['equipo']);
 				$obj->estado->setId($_POST['estado']);
-				$obj->setFecha($_POST['fecha']);
+				$obj->setFecha(date("Y-m-d"));
+				//$obj->setFolio($_POST['folio']);
+				
 				$obj->setSolicitante($_POST['solicitante']);
 				$obj->setFalla($_POST['falla']);
 				$obj->setServicio($_POST['servicio']);
 				$obj->setMateriales($_POST['materiales']);
 				$obj->setComentarios($_POST['comentarios']);
-				$obj->setAsignado($_POST['asignado']);
+				if ($userSesion->getTipo() <> 1)
+					$obj->setAsignado($userSesion->getNombreCompleto());
+				else	
+					$obj->setAsignado($_POST['asignado']);
+					
 				$obj->setLimpiezaCarcasa($_POST['limpiezaCarcasa']);
 				$obj->setLimpiezaPartesElectricas($_POST['limpiezaPartesElectricas']);
 				$obj->setLimpiezaSerpentinCondensador($_POST['limpiezaSerpentinCondensador']);
@@ -77,12 +94,19 @@ switch($objModulo->getId()){
 				$obj->setCompresor(json_encode($_POST['compresor']));
 				$obj->setEvaporador(json_encode($_POST['evaporador']));
 				$obj->setCondensador(json_encode($_POST['condensador']));
-				
-				$smarty->assign("json", array("band" => $obj->guardar()));
+				$band = $obj->guardar();
+				$smarty->assign("json", array("band" => $band, "idOrden" => $obj->getId()));
 			break;
 			case 'del':
 				$obj = new TOrden($_POST['id']);
 				$smarty->assign("json", array("band" => $obj->eliminar()));
+			break;
+			case 'validaFolio':
+				$db = TBase::conectaDB();
+				$sql = "select idOrden from orden where folio = '".$_POST['txtFolio']."' and not idOrden = '".$_POST['id']."'";
+				$rs = $db->query($sql) or errorMySQL($db, $sql);
+				
+				echo $rs->num_rows == 0?"true":"false";
 			break;
 		}
 	break;

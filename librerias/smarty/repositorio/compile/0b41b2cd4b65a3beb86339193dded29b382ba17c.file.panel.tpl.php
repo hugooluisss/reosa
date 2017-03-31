@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-03-30 10:18:59
+<?php /* Smarty version Smarty-3.1.11, created on 2017-03-31 13:52:53
          compiled from "templates/plantillas/modulos/ordenes/panel.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:28833802658db4cf81118b3-65111044%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0b41b2cd4b65a3beb86339193dded29b382ba17c' => 
     array (
       0 => 'templates/plantillas/modulos/ordenes/panel.tpl',
-      1 => 1490890695,
+      1 => 1490989751,
       2 => 'file',
     ),
   ),
@@ -22,6 +22,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'estados' => 0,
     'row' => 0,
     'vendedores' => 0,
+    'PAGE' => 0,
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
@@ -47,10 +48,16 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 		<form role="form" id="frmAdd" class="form-horizontal" onsubmit="javascript: return false;">
 			<div class="box">
 				<div class="box-body">			
-					<div class="form-group">
+					<div class="form-group hidden">
 						<label for="txtFecha" class="col-sm-2">Fecha</label>
 						<div class="col-sm-2">
 							<input class="form-control" id="txtFecha" name="txtFecha">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="txtFolio" class="col-sm-2">Folio</label>
+						<div class="col-sm-2">
+							<input class="form-control" id="txtFolio" name="txtFolio" disabled="true" readonly="true">
 						</div>
 					</div>
 					<div class="form-group">
@@ -362,4 +369,7 @@ $_smarty_tpl->tpl_vars["row"]->_loop = true;
 			</div>
 		</form>
 	</div>
-</div><?php }} ?>
+</div>
+
+<?php echo $_smarty_tpl->getSubTemplate (($_smarty_tpl->tpl_vars['PAGE']->value['rutaModulos']).("modulos/fotos/winPanel.tpl"), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+<?php }} ?>

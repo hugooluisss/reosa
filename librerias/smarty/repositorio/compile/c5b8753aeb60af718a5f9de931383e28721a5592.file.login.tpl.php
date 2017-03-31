@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-03-28 21:15:12
+<?php /* Smarty version Smarty-3.1.11, created on 2017-03-31 11:51:15
          compiled from "templates/plantillas/layout/login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:107494113858db26c0316609-33800950%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c5b8753aeb60af718a5f9de931383e28721a5592' => 
     array (
       0 => 'templates/plantillas/layout/login.tpl',
-      1 => 1490644052,
+      1 => 1490980329,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.11',
+  'unifunc' => 'content_58db26c04a85c2_44318184',
   'variables' => 
   array (
     'PAGE' => 0,
     'script' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_58db26c04a85c2_44318184',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_58db26c04a85c2_44318184')) {function content_58db26c04a85c2_44318184($_smarty_tpl) {?><!DOCTYPE html>
 <html>
@@ -88,7 +88,7 @@ img/logo.png" />
 				</p>
 				<form action="#" id="frmLogin" method="post">
 					<div class="form-group has-feedback">
-						<input type="text" class="form-control" placeholder="Clave" id="txtUsuario" name="txtUsuario">
+						<input type="text" class="form-control" placeholder="Usuario" id="txtUsuario" name="txtUsuario">
 						<span class="glyphicon glyphicon-user form-control-feedback"></span>
 					</div>
 					<div class="form-group has-feedback">

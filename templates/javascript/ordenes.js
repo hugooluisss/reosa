@@ -24,9 +24,23 @@ $(document).ready(function(){
 	
 	$("#frmAdd").validate({
 		debug: true,
+		onfocusout: true,
 		rules: {
 			selEquipo: "required",
-			txtFecha: "required",
+			/*
+			txtFolio: {
+				required: true,
+				remote: {
+					url: "cordenes",
+					type: "post",
+					data: {
+						action: "validaFolio",
+						id: function(){
+							return $("#id").val();
+						}
+					}
+				}
+			},*/
 			selEstado: "required",
 			txtSolicitante: "required",
 			txtFallas: "required",
@@ -34,6 +48,11 @@ $(document).ready(function(){
 			
 		},
 		wrapper: 'span',
+		messages: {
+			txtFolio: {
+				remote: "Este número de reporte ya fue registrado"
+			},
+		},
 		submitHandler: function(form){
 			var obj = new TOrden;
 			obj.add({
@@ -41,6 +60,7 @@ $(document).ready(function(){
 				"estado": $("#selEstado").val(),
 				"equipo": $("#selEquipo").val(),
 				"fecha": $("#txtFecha").val(), 
+				"folio": $("#txtFolio").val(), 
 				"solicitante": $("#txtSolicitante").val(),
 				"falla": $("#txtFallas").val(),
 				"servicio": $("#txtServicio").val(),
@@ -110,6 +130,9 @@ $(document).ready(function(){
 							getLista();
 							$("#frmAdd").get(0).reset();
 							$('#panelTabs a[href="#listas"]').tab('show');
+							
+							$("#winFotografias").attr("data", JSON.stringify(datos));
+							$("#winFotografias").modal();
 						}else{
 							alert("Upps... No se pudo guardar la orden");
 						}
@@ -135,13 +158,20 @@ $(document).ready(function(){
 				}
 			});
 			
+			$("[action=fotos]").click(function(){
+				$("#winFotografias").attr("data", $(this).attr("datos"));
+				
+				$("#winFotografias").modal();
+			});
+			
 			$("[action=modificar]").click(function(){
 				var el = jQuery.parseJSON($(this).attr("datos"));
 				
-				$("#id").val(el.idEstado);
+				$("#id").val(el.idOrden);
 				$("#selEstado").val(el.idEstado);
 				$("#selEquipo").val(el.idEquipo);
 				$("#txtFecha").val(el.fecha);
+				$("#txtFolio").val(el.idOrden);
 				$("#txtSolicitante").val(el.solicitante);
 				$("#txtFallas").val(el.falla);
 				$("#txtServicio").val(el.servicio);

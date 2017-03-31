@@ -1,13 +1,14 @@
 <?php
 /**
-* TEstado
+* TFotografia
 * @package aplicacion
 * @autor Hugo Santiago hugooluisss@gmail.com
 **/
 
-class TEstado{
-	private $idEstado;
-	private $color;
+class TFotografia{
+	private $idFoto;
+	private $idOrden;
+	private $fecha;
 	private $nombre;
 	
 	/**
@@ -17,7 +18,7 @@ class TEstado{
 	* @access public
 	* @param int $id identificador del objeto
 	*/
-	public function TEstado($id = ''){
+	public function TFotografia($id = ''){
 		$this->setId($id);
 		
 		return true;
@@ -36,7 +37,7 @@ class TEstado{
 		if ($id == '') return false;
 		
 		$db = TBase::conectaDB();
-		$sql = "select * from estado where idEstado = ".$id;
+		$sql = "select * from fotografia where idFoto = ".$id;
 		$rs = $db->query($sql) or errorMySQL($db, $sql);
 		
 		foreach($rs->fetch_assoc() as $field => $val)
@@ -54,7 +55,7 @@ class TEstado{
 	*/
 	
 	public function getId(){
-		return $this->idEstado;
+		return $this->idFoto;
 	}
 	
 	/**
@@ -84,7 +85,7 @@ class TEstado{
 	}
 	
 	/**
-	* Establece el color
+	* Establece la orden
 	*
 	* @autor Hugo
 	* @access public
@@ -92,21 +93,21 @@ class TEstado{
 	* @return boolean True si se realizó sin problemas
 	*/
 	
-	public function setColor($val = ''){
-		$this->color = $val;
+	public function setOrden($val = ''){
+		$this->idOrden = $val;
 		return true;
 	}
 	
 	/**
-	* Retorna el color
+	* Retorna la orden
 	*
 	* @autor Hugo
 	* @access public
 	* @return string Texto
 	*/
 	
-	public function getColor(){
-		return $this->color;
+	public function getOrden(){
+		return $this->idOrden;
 	}
 	
 	/**
@@ -118,11 +119,14 @@ class TEstado{
 	*/
 	
 	public function guardar(){
+		if ($this->getOrden() == '') return false;
+		
 		$db = TBase::conectaDB();
 		
 		if ($this->getId() == ''){
-			$sql = "INSERT INTO estado(nombre) VALUES('".$this->getNombre()."');";
-			$rs = $db->query($sql) or errorMySQL($db, $sql);;
+			$sql = "INSERT INTO fotografia(idOrden, nombre) VALUES(".$this->getOrden().", '".$this->getNombre()."');";
+			
+			$rs = $db->query($sql) or errorMySQL($db, $sql);
 			if (!$rs) return false;
 			
 			$this->idEstado = $db->insert_id;
@@ -131,13 +135,11 @@ class TEstado{
 		if ($this->getId() == '')
 			return false;
 		
-		$sql = "UPDATE estado
+		$sql = "UPDATE fotografia
 			SET
-				nombre = '".$this->getNombre()."',
-				color = '".$this->getColor()."'
+				nombre = '".$this->getNombre()."'
 			WHERE idEstado = ".$this->getId();
-			
-		$rs = $db->query($sql) or errorMySQL($db, $sql);
+		$rs = $db->query($sql) or errorMyQL($sql);
 			
 		return $rs?true:false;
 	}
@@ -154,7 +156,7 @@ class TEstado{
 		if ($this->getId() == '') return false;
 		
 		$db = TBase::conectaDB();
-		$sql = "delete from estado where idEstado = ".$this->getId();
+		$sql = "delete from fotografia where idFoto = ".$this->getId();
 		$rs = $db->query($sql) or errorMySQL($db, $sql);
 		
 		return $rs?true:false;

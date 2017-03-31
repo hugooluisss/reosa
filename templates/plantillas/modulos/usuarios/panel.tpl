@@ -48,7 +48,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="txtEmail" class="col-lg-2">Clave</label>
+						<label for="txtEmail" class="col-lg-2">Usuario</label>
 						<div class="col-lg-3">
 							<input class="form-control" id="txtClave" name="txtClave" type="text">
 						</div>

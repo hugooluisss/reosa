@@ -9,6 +9,7 @@ TOrden = function(){
 				"estado": datos.estado,
 				"equipo": datos.equipo,
 				"fecha": datos.fecha, 
+				"folio": datos.folio, 
 				"solicitante": datos.solicitante,
 				"falla": datos.falla,
 				"servicio": datos.servicio,

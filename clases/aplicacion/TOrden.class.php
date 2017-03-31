@@ -8,6 +8,7 @@
 
 class TOrden{
 	private $idOrden;
+	private $folio;
 	public $equipo;
 	public $estado;
 	public $usuario;
@@ -127,6 +128,32 @@ class TOrden{
 	
 	public function getFecha(){
 		return $this->fecha;
+	}
+	
+	/**
+	* Establece el número de folio o reporte
+	*
+	* @autor Hugo
+	* @access public
+	* @param string $val Valor a asignar
+	* @return boolean True si se realizó sin problemas
+	*/
+	
+	public function setFolio($val = ''){
+		$this->folio = $val;
+		return true;
+	}
+	
+	/**
+	* Retorna el número de folio o reporte
+	*
+	* @autor Hugo
+	* @access public
+	* @return string Texto
+	*/
+	
+	public function getFolio(){
+		return $this->idOrden;
 	}
 	
 	/**
@@ -885,7 +912,8 @@ class TOrden{
 				ambiente = '".$this->ambiente."',
 				compresor = '".$this->compresor."',
 				evaporador = '".$this->evaporador."',
-				condensador = '".$this->condensador."'
+				condensador = '".$this->condensador."',
+				folio = '".$this->getFolio()."'
 			WHERE idOrden = ".$this->getId();
 			
 		$rs = $db->query($sql) or ErrorSistema($db->error." en ".$sql);
