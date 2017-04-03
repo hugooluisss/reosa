@@ -50,7 +50,7 @@
 						</div>
 						<label for="selEquipo" class="col-sm-2">Equipo</label>
 						<div class="col-sm-4">
-							<select id="selEquipo" name="idEquipo" class="form-control">
+							<select id="selEquipo" name="selEquipo" class="form-control">
 							</select>
 						</div>
 					</div>
@@ -332,3 +332,6 @@
 </div>
 
 {include file=$PAGE.rutaModulos|cat:"modulos/fotos/winPanel.tpl"}
+
+{include file=$PAGE.rutaModulos|cat:"modulos/ordenes/winCliente.tpl"}
+{include file=$PAGE.rutaModulos|cat:"modulos/ordenes/winEquipo.tpl"}

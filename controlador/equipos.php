@@ -30,7 +30,7 @@ switch($objModulo->getId()){
 				$obj->setModelo($_POST['modelo']);
 				$obj->setCapacidad($_POST['capacidad']);
 
-				$smarty->assign("json", array("band" => $obj->guardar()));
+				$smarty->assign("json", array("band" => $obj->guardar(), "identificador" => $obj->getId()));
 			break;
 			case 'del':
 				$obj = new TEquipo($_POST['id']);
@@ -44,7 +44,7 @@ switch($objModulo->getId()){
 			break;
 			case 'getLista':
 				$db = TBase::conectaDB();
-				$rs = $db->query("select * from equipo where idCliente = ".$_POST['cliente']." and visible = true");
+				$rs = $db->query("select * from equipo where idCliente = ".$_POST['cliente']." and visible = true order by codigo");
 				$datos = array();
 				while($row = $rs->fetch_assoc()){
 					$row['json'] = json_encode($row);

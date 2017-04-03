@@ -29,14 +29,14 @@ switch($objModulo->getId()){
 		
 		if ($userSesion->getTipo() == 1)
 			$sql = "select a.*, b.nombre as estado, b.color,
-					d.nombre as cliente
+					d.nombre as cliente, c.idCliente
 				from orden a join estado b using(idEstado)
 					join equipo c using(idEquipo)
 					join cliente d using(idCliente) 
 				where a.visible = true";
 		else
 			$sql = "select a.*, b.nombre as estado, b.color,
-					d.nombre as cliente
+					d.nombre as cliente, c.idCliente
 				from orden a join estado b using(idEstado)
 					join equipo c using(idEquipo)
 					join cliente d using(idCliente) 

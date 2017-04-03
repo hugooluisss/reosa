@@ -1,0 +1,7 @@
+<b style="color:GREEN;">ERROR DEL SISTEMA</b><strong> Error en la linea <span style="color:BLUE">0</span> del archivo <span style="color:BLUE">MySQL - MOD: listaOrdenes,</span> el dia <span style="color:BLUE">03/04/2017 11:04,</span><br /></strong><strong><p>El mensaje Mandado es :</p></strong>Unknown column 'a.idCliente' in 'field list' en 
+select a.*, b.nombre as estado, b.color,
+					d.nombre as cliente, a.idCliente
+				from orden a join estado b using(idEstado)
+					join equipo c using(idEquipo)
+					join cliente d using(idCliente) 
+				where a.visible = true and idUsuario = 1<br /><hr>

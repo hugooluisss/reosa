@@ -1,9 +1,9 @@
 $(document).ready(function(){
 	$("#txtFecha").datepicker();
 	getLista();
-	setListaClientes();
 	
 	$("#panelTabs li a[href=#add]").click(function(){
+		setListaClientes();
 		$("#frmAdd").get(0).reset();
 		$("#id").val("");
 		$("form:not(.filter) :input:visible:enabled:first").focus();
@@ -19,10 +19,108 @@ $(document).ready(function(){
 	});
 	
 	$("#selCliente").change(function(){
-		setEquipos();
+		if ($(this).val() == 'nuevo')
+			$("#winClientes").modal();
+		else
+			setEquipos();
 	});
 	
-	$("#frmAdd").validate({
+	$("#selEquipo").change(function(){
+		console.log("Cambio de seleccion de equipo", $(this).val());
+		if ($(this).val() == 'nuevo')
+			$("#winEquipo").modal();
+	});
+	
+	var ventanaClientes = $("#winClientes");
+	ventanaClientes.find("#frmAdd").validate({
+		debug: true,
+		rules: {
+			txtNombre: "required",
+			},
+		wrapper: 'span', 
+		submitHandler: function(form){
+			var obj = new TCliente;
+			obj.add({
+				id: ventanaClientes.find("#id").val(), 
+				nombre: ventanaClientes.find("#txtNombre").val(), 
+				direccion: ventanaClientes.find("#txtDireccion").val(),
+				ciudad: ventanaClientes.find("#txtCiudad").val(),
+				colonia: ventanaClientes.find("#txtColonia").val(),
+				fn: {
+					after: function(datos){
+						if (datos.band){
+							ventanaClientes.modal("hide");
+							$("#winEquipo").modal();
+							setListaClientes(datos.identificador);
+						}else{
+							alert("Upps... No se pudo guardar");
+						}
+					}
+				}
+			});
+        }
+
+    });
+	
+	$("#winClientes").on("show.bs.modal", function(e){
+		ventanaClientes.find("#frmAdd").get(0).reset();
+		ventanaClientes.find("#txtNombre").focus();
+	});
+	
+	$("#frmAddEquipos").validate({
+		debug: true,
+		rules: {
+			txtCodigo: {
+				required: true,
+				remote: {
+					url: "cequipos",
+					type: "post",
+					data: {
+						action: "validaCodigo",
+						id: function(){
+							return $("#idEquipo").val();
+						}
+					}
+				}
+			},
+			txtTipo: "required"
+		},
+		wrapper: 'span', 
+		submitHandler: function(form){
+		
+			var obj = new TEquipo;
+			obj.add({
+				id: $("#frmAddEquipos").find("#idEquipo").val(), 
+				codigo: $("#frmAddEquipos").find("#txtCodigo").val(), 
+				tipo: $("#frmAddEquipos").find("#txtTipo").val(),
+				area: $("#frmAddEquipos").find("#txtArea").val(),
+				marca: $("#frmAddEquipos").find("#txtMarca").val(),
+				modelo: $("#frmAddEquipos").find("#txtModelo").val(),
+				capacidad: $("#frmAddEquipos").find("#txtCapacidad").val(),
+				cliente: $("#selCliente").val(),
+				fn: {
+					after: function(datos){
+						if (datos.band){
+							$("#winEquipo").modal("hide");
+							$("#frmAddEquipos").get(0).reset();
+							
+							setEquipos(datos.identificador);
+						}else{
+							alert("Upps... No se pudo guardar");
+						}
+					}
+				}
+			});
+        }
+
+    });
+    
+    $("#winEquipo").on("show.bs.modal", function(e){
+		ventanaClientes.find("#frmAdd").get(0).reset();
+		ventanaClientes.find("#txtNombre").focus();
+	});
+	
+	$("#add").find("#frmAdd").validate({
 		debug: true,
 		onfocusout: true,
 		rules: {
@@ -56,79 +154,79 @@ $(document).ready(function(){
 		submitHandler: function(form){
 			var obj = new TOrden;
 			obj.add({
-				"id": $("#id").val(),
-				"estado": $("#selEstado").val(),
-				"equipo": $("#selEquipo").val(),
-				"fecha": $("#txtFecha").val(), 
-				"folio": $("#txtFolio").val(), 
-				"solicitante": $("#txtSolicitante").val(),
-				"falla": $("#txtFallas").val(),
-				"servicio": $("#txtServicio").val(),
-				"materiales": $("#txtMateriales").val(),
-				"comentarios": $("#txtComentarios").val(),
-				"asignado": $("#selAsignado").val(),
+				"id": $("#add").find("#id").val(),
+				"estado": $("#add").find("#selEstado").val(),
+				"equipo": $("#add").find("#selEquipo").val(),
+				"fecha": $("#add").find("#txtFecha").val(), 
+				"folio": $("#add").find("#txtFolio").val(), 
+				"solicitante": $("#add").find("#txtSolicitante").val(),
+				"falla": $("#add").find("#txtFallas").val(),
+				"servicio": $("#add").find("#txtServicio").val(),
+				"materiales": $("#add").find("#txtMateriales").val(),
+				"comentarios": $("#add").find("#txtComentarios").val(),
+				"asignado": $("#add").find("#selAsignado").val(),
 				
-				"limpiezaCarcasa": $("#selLimpiezaCarcasa").val(),
-				"limpiezaPartesElectricas": $("#selLimpiezaPartesElectricas").val(),
-				"limpiezaSerpentinCondensador": $("#selLimpiezaSerpentinCondensador").val(),
-				"limpiezaSerpentinEvaporador": $("#selLimpiezaSerpentinEvaporador").val(),
-				"chequeoCargaRefrigerante": $("#selChequeoCargaRefrigerante").val(),
-				"chequeoElectricoConexiones": $("#selChequeoElectricoConexiones").val(),
+				"limpiezaCarcasa": $("#add").find("#selLimpiezaCarcasa").val(),
+				"limpiezaPartesElectricas": $("#add").find("#selLimpiezaPartesElectricas").val(),
+				"limpiezaSerpentinCondensador": $("#add").find("#selLimpiezaSerpentinCondensador").val(),
+				"limpiezaSerpentinEvaporador": $("#add").find("#selLimpiezaSerpentinEvaporador").val(),
+				"chequeoCargaRefrigerante": $("#add").find("#selChequeoCargaRefrigerante").val(),
+				"chequeoElectricoConexiones": $("#add").find("#selChequeoElectricoConexiones").val(),
 				
-				"succion": $("#txtSuccion").val(),
-				"descarga": $("#txtDescarga").val(),
-				"aceite": $("#txtAceite").val(),
-				"paroBaja": $("#txtParoBaja").val(),
-				"paroAlta": $("#txtParoAlta").val(),
-				"arranque": $("#txtArranque").val(),
-				"dentroCamara": $("#txtDentroCamara").val(),
-				"aguaEntrada": $("#txtAguaEntrada").val(),
-				"aguaSalida": $("#txtAguaSalida").val(),
-				"aireInyeccion": $("#txtAireInyeccion").val(),
-				"aireRetorno": $("#txtAireRetorno").val(),
-				"ambiente": $("#txtAmbiente").val(),
+				"succion": $("#add").find("#txtSuccion").val(),
+				"descarga": $("#add").find("#txtDescarga").val(),
+				"aceite": $("#add").find("#txtAceite").val(),
+				"paroBaja": $("#add").find("#txtParoBaja").val(),
+				"paroAlta": $("#add").find("#txtParoAlta").val(),
+				"arranque": $("#add").find("#txtArranque").val(),
+				"dentroCamara": $("#add").find("#txtDentroCamara").val(),
+				"aguaEntrada": $("#add").find("#txtAguaEntrada").val(),
+				"aguaSalida": $("#add").find("#txtAguaSalida").val(),
+				"aireInyeccion": $("#add").find("#txtAireInyeccion").val(),
+				"aireRetorno": $("#add").find("#txtAireRetorno").val(),
+				"ambiente": $("#add").find("#txtAmbiente").val(),
 				
 				"compresor": {
-					"hp": $("#txtCompresorHP").val(),
-					"fases": $("#txtCompresorFases").val(),
-					"cantidad": $("#txtCompresorCantidad").val(),
-					"placa": $("#txtCompresorAmp").val(),
-					"l1": $("#txtCompresorL1").val(),
-					"l2": $("#txtCompresorL2").val(),
-					"l3": $("#txtCompresorL3").val(),
-					"l1l2": $("#txtCompresorL1L2").val(),
-					"l1l3": $("#txtCompresorL1L3").val(),
-					"l2l3": $("#txtCompresorL2L3").val()
+					"hp": $("#add").find("#txtCompresorHP").val(),
+					"fases": $("#add").find("#txtCompresorFases").val(),
+					"cantidad": $("#add").find("#txtCompresorCantidad").val(),
+					"placa": $("#add").find("#txtCompresorAmp").val(),
+					"l1": $("#add").find("#txtCompresorL1").val(),
+					"l2": $("#add").find("#txtCompresorL2").val(),
+					"l3": $("#add").find("#txtCompresorL3").val(),
+					"l1l2": $("#add").find("#txtCompresorL1L2").val(),
+					"l1l3": $("#add").find("#txtCompresorL1L3").val(),
+					"l2l3": $("#add").find("#txtCompresorL2L3").val()
 				},
 				"evaporador": {
-					"hp": $("#txtEvaporadorHP").val(),
-					"fases": $("#txtEvaporadorFases").val(),
-					"cantidad": $("#txtEvaporadorCantidad").val(),
-					"placa": $("#txtEvaporadorAmp").val(),
-					"l1": $("#txtEvaporadorL1").val(),
-					"l2": $("#txtEvaporadorL2").val(),
-					"l3": $("#txtEvaporadorL3").val(),
-					"l1l2": $("#txtEvaporadorL1L2").val(),
-					"l1l3": $("#txtEvaporadorL1L3").val(),
-					"l2l3": $("#txtEvaporadorL2L3").val()
+					"hp": $("#add").find("#txtEvaporadorHP").val(),
+					"fases": $("#add").find("#txtEvaporadorFases").val(),
+					"cantidad": $("#add").find("#txtEvaporadorCantidad").val(),
+					"placa": $("#add").find("#txtEvaporadorAmp").val(),
+					"l1": $("#add").find("#txtEvaporadorL1").val(),
+					"l2": $("#add").find("#txtEvaporadorL2").val(),
+					"l3": $("#add").find("#txtEvaporadorL3").val(),
+					"l1l2": $("#add").find("#txtEvaporadorL1L2").val(),
+					"l1l3": $("#add").find("#txtEvaporadorL1L3").val(),
+					"l2l3": $("#add").find("#txtEvaporadorL2L3").val()
 				},
 				"condensador": {
-					"hp": $("#txtCondensadorHP").val(),
-					"fases": $("#txtCondensadorFases").val(),
-					"cantidad": $("#txtCondensadorCantidad").val(),
-					"placa": $("#txtCondensadorAmp").val(),
-					"l1": $("#txtCondensadorL1").val(),
-					"l2": $("#txtCondensadorL2").val(),
-					"l3": $("#txtCondensadorL3").val(),
-					"l1l2": $("#txtCondensadorL1L2").val(),
-					"l1l3": $("#txtCondensadorL1L3").val(),
-					"l2l3": $("#txtCondensadorL2L3").val()
+					"hp": $("#add").find("#txtCondensadorHP").val(),
+					"fases": $("#add").find("#txtCondensadorFases").val(),
+					"cantidad": $("#add").find("#txtCondensadorCantidad").val(),
+					"placa": $("#add").find("#txtCondensadorAmp").val(),
+					"l1": $("#add").find("#txtCondensadorL1").val(),
+					"l2": $("#add").find("#txtCondensadorL2").val(),
+					"l3": $("#add").find("#txtCondensadorL3").val(),
+					"l1l2": $("#add").find("#txtCondensadorL1L2").val(),
+					"l1l3": $("#add").find("#txtCondensadorL1L3").val(),
+					"l2l3": $("#add").find("#txtCondensadorL2L3").val()
 				},
 				fn:{
 					after: function(datos){
 						if (datos.band){
 							getLista();
-							$("#frmAdd").get(0).reset();
+							$("#add").find("#frmAdd").get(0).reset();
 							$('#panelTabs a[href="#listas"]').tab('show');
 							
 							$("#winFotografias").attr("data", JSON.stringify(datos));
@@ -169,6 +267,9 @@ $(document).ready(function(){
 				
 				$("#id").val(el.idOrden);
 				$("#selEstado").val(el.idEstado);
+				setListaClientes(el.idCliente, el.idEquipo);
+				
+				$("#selCliente").val(el.idCliente);
 				$("#selEquipo").val(el.idEquipo);
 				$("#txtFecha").val(el.fecha);
 				$("#txtFolio").val(el.idOrden);
@@ -261,34 +362,49 @@ $(document).ready(function(){
 		});
 	};
 	
-	function setListaClientes(){
+	function setListaClientes(identificador, equipo){
 		var obj = new TCliente;
+		console.log("Cliente seleccionado", identificador);
 		obj.getLista({
 			before: function(){
 				$("#selCliente").find("option").remove();
 			}, after: function(clientes){
+				$("#selCliente").append($("<option />").val("").text("Seleccciona"));
+				$("#selCliente").append($("<option />").val("nuevo").text("Nuevo cliente"));
+				
 				$.each(clientes, function(i, cliente){
 					$("#selCliente").append($("<option />").val(cliente.idCliente).text(cliente.nombre));
-					
-					setEquipos();
 				});
+				if (identificador != undefined)
+					$("#selCliente").val(identificador);
+				else
+					$("#selCliente").val("");
+				console.log("Equipo seleccionado", equipo);
+				setEquipos(equipo);
 			}
 		});
 	}
 	
-	function setEquipos(){
-		if ($("#selCliente").val() == '')
+	function setEquipos(equipo){
+		if ($("#selCliente").val() == '' || $("#selCliente").val() == 'nuevo')
 			console.log("No se puede obtener, se necesita un cliente");
-		else
+		else{
 			var obj = new TEquipo;
 			obj.getLista($("#selCliente").val(), {
 				before: function(){
 					$("#selEquipo").find("option").remove();
 				}, after: function(equipos){
+					$("#selEquipo").append($("<option />").val("").text("Seleccciona"));
+					$("#selEquipo").append($("<option />").val("nuevo").text("Nuevo equipo"));
+					
 					$.each(equipos, function(i, equipo){
 						$("#selEquipo").append($("<option />").val(equipo.idEquipo).text(equipo.codigo + " " + equipo.marca + " " + equipo.modelo));
 					});
+					
+					if (equipo != undefined)
+						$("#selEquipo").val(equipo);
 				}
 			});
+		}
 	}
 });

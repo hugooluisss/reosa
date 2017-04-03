@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-03-28 21:19:20
+<?php /* Smarty version Smarty-3.1.11, created on 2017-04-03 11:25:47
          compiled from "templates/plantillas/modulos/equipos/winEquipos.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:120211972458dab71a90a302-48653093%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '5262b048cc255c2fb1435abc9dc773e1e17f02fb' => 
     array (
       0 => 'templates/plantillas/modulos/equipos/winEquipos.tpl',
-      1 => 1490732005,
+      1 => 1491236742,
       2 => 'file',
     ),
   ),
@@ -17,6 +17,10 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'version' => 'Smarty-3.1.11',
   'unifunc' => 'content_58dab71a93e705_04791230',
+  'variables' => 
+  array (
+    'PAGE' => 0,
+  ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_58dab71a93e705_04791230')) {function content_58dab71a93e705_04791230($_smarty_tpl) {?><div class="modal fade" id="winEquipos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -45,49 +49,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<h1>Agregar / Modificar equipo</h1>
 			</div>
 			<div class="modal-body">
-				<form role="form" id="frmAddEquipos" class="form-horizontal" onsubmit="javascript: return false;">
-					<div class="form-group">
-						<label for="txtCodigo" class="col-lg-2">Código</label>
-						<div class="col-lg-10">
-							<input class="form-control" id="txtCodigo" name="txtCodigo">
-						</div>
-						
-					</div>
-					<div class="form-group">
-						<label for="txtTipo" class="col-lg-2">Tipo</label>
-						<div class="col-lg-10">
-							<input class="form-control" id="txtTipo" name="txtTipo" type="text">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtArea" class="col-lg-2">Área</label>
-						<div class="col-lg-10">
-							<input class="form-control" id="txtArea" name="txtArea" type="text">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtMarca" class="col-lg-2">Marca</label>
-						<div class="col-lg-10">
-							<input class="form-control" id="txtMarca" name="txtMarca" type="text">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtModelo" class="col-lg-2">Modelo</label>
-						<div class="col-lg-10">
-							<input class="form-control" id="txtModelo" name="txtModelo" type="text">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtCapacidad" class="col-lg-2">Capacidad</label>
-						<div class="col-lg-10">
-							<input class="form-control" id="txtCapacidad" name="txtCapacidad" type="text">
-						</div>
-					</div>
-					<button type="reset" id="btnReset" class="btn btn-default">Cancelar</button>
-					<button type="submit" class="btn btn-info pull-right">Guardar</button>
-					<input type="hidden" id="idEquipo"/>
-					<input type="hidden" id="idCliente"/>
-				</form>
+				<?php echo $_smarty_tpl->getSubTemplate (($_smarty_tpl->tpl_vars['PAGE']->value['rutaModulos']).("modulos/equipos/add.tpl"), $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
 			</div>
 		</div>
 	</div>
