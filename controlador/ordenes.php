@@ -108,6 +108,35 @@ switch($objModulo->getId()){
 				
 				echo $rs->num_rows == 0?"true":"false";
 			break;
+			case 'imprimir':
+				#se genera el documento pdf
+				global $userSesion;
+				require_once(getcwd()."/repositorio/pdf/orden.php");
+				$orden = $_POST['orden'];
+				$db = TBase::conectaDB();
+				
+				$pdf = new ROrden();
+				$pdf->generar($orden);
+				
+				$documento = $pdf->output();
+				
+				
+				$obj = new TOrden($orden);
+				$cliente = new TCliente($orden->equipo->getCliente());
+				
+				$datos = array();
+				$datos['cliente.nombre'] = $cliente->getNombre();
+				$datos['orden.idOrden'] = $orden->getId();
+				
+				$email = new TMail();
+				$email->setTema("Orden de servicio");
+				#$email->setOrigen("Grupo Domi", $ini['mail']['user']);
+				$email->addDestino($cliente->getCorreo(), utf8_decode($cliente->getNombre()));
+				
+				$email->setBodyHTML(utf8_decode($email->construyeMail(file_get_contents("repositorio/mail/sendOrden.html"), $datos)));
+				
+				$smarty->assign("json", array("band" => true, "documento" => $documento));
+			break;
 		}
 	break;
 }

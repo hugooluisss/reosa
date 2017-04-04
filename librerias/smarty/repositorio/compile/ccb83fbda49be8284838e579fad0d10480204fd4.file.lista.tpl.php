@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-03-31 13:48:29
+<?php /* Smarty version Smarty-3.1.11, created on 2017-04-04 10:33:49
          compiled from "templates/plantillas/modulos/ordenes/lista.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:4817353558db50286b4026-31829242%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ccb83fbda49be8284838e579fad0d10480204fd4' => 
     array (
       0 => 'templates/plantillas/modulos/ordenes/lista.tpl',
-      1 => 1490989630,
+      1 => 1491320025,
       2 => 'file',
     ),
   ),
@@ -54,6 +54,8 @@ $_smarty_tpl->tpl_vars["row"]->_loop = true;
 "><?php echo $_smarty_tpl->tpl_vars['row']->value['estado'];?>
 </span></td>
 						<td style="text-align: right">
+							<button type="button" class="btn btn-default" action="pdf" title="Imprimir" identificador="<?php echo $_smarty_tpl->tpl_vars['row']->value['idOrden'];?>
+"><i class="fa fa-file-pdf-o"></i></button>
 							<button type="button" class="btn btn-default" action="fotos" title="Fotografías" datos='<?php echo $_smarty_tpl->tpl_vars['row']->value['json'];?>
 '><i class="fa fa-picture-o" aria-hidden="true"></i>
 </button>
@@ -61,7 +63,7 @@ $_smarty_tpl->tpl_vars["row"]->_loop = true;
 '><i class="fa fa-pencil"></i></button>
 							
 							<?php if ($_smarty_tpl->tpl_vars['row']->value['eliminar']==1){?>
-								<button type="button" class="btn btn-danger" action="eliminar" title="Eliminar" item="<?php echo $_smarty_tpl->tpl_vars['row']->value['idEstado'];?>
+								<button type="button" class="btn btn-danger" action="eliminar" title="Eliminar" item="<?php echo $_smarty_tpl->tpl_vars['row']->value['idOrden'];?>
 "><i class="fa fa-times"></i></button>
 							<?php }?>
 						</td>

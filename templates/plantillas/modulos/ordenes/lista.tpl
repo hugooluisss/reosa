@@ -18,12 +18,13 @@
 						<td>{$row.cliente}</td>
 						<td><span style="color: {$row.color}">{$row.estado}</span></td>
 						<td style="text-align: right">
+							<button type="button" class="btn btn-default" action="pdf" title="Imprimir" identificador="{$row.idOrden}"><i class="fa fa-file-pdf-o"></i></button>
 							<button type="button" class="btn btn-default" action="fotos" title="Fotografías" datos='{$row.json}'><i class="fa fa-picture-o" aria-hidden="true"></i>
 </button>
 							<button type="button" class="btn btn-success" action="modificar" title="Modificar" datos='{$row.json}'><i class="fa fa-pencil"></i></button>
 							
 							{if $row.eliminar eq 1}
-								<button type="button" class="btn btn-danger" action="eliminar" title="Eliminar" item="{$row.idEstado}"><i class="fa fa-times"></i></button>
+								<button type="button" class="btn btn-danger" action="eliminar" title="Eliminar" item="{$row.idOrden}"><i class="fa fa-times"></i></button>
 							{/if}
 						</td>
 					</tr>

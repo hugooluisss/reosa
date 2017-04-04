@@ -438,8 +438,8 @@ class TOrden{
 	* @return string Texto
 	*/
 	
-	public function getChequeCarcaRefrigerante(){
-		return $this->chequeoCarcaRefrigerante;
+	public function getChequeoCargaRefrigerante(){
+		return $this->chequeoCargaRefrigerante;
 	}
 	
 	/**
@@ -595,7 +595,7 @@ class TOrden{
 	*/
 	
 	public function getParoAlta(){
-		return $this->paroAlto;
+		return $this->paroAlta;
 	}
 	
 	/**
@@ -936,6 +936,28 @@ class TOrden{
 		$rs = $db->query("update orden set visible = false where idOrden = ".$this->getId());
 		
 		return $rs?true:false;
+	}
+	
+	/**
+	* Retorna las fotografias
+	*
+	* @autor Hugo
+	* @access public
+	* @return boolean True si se realizó sin problemas
+	*/
+	
+	public function getFotos(){
+		if ($this->getId() == '') return false;
+		
+		$db = TBase::conectaDB();
+		$rs = $db->query("select * from fotografia where idOrden = ".$this->getId());
+		$datos = array();
+		
+		while($row = $rs->fetch_assoc()){
+			array_push($datos, new TFotografia($row['idFoto']));
+		}
+		
+		return $datos;
 	}
 }
 ?>

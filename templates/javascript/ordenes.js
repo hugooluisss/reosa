@@ -262,6 +262,34 @@ $(document).ready(function(){
 				$("#winFotografias").modal();
 			});
 			
+			var ventanaOrden = undefined;
+			
+			$("[action=pdf]").click(function(){
+				var el = $(this)
+				el.prop("disabled", true);
+				
+				$.post("cordenes", {
+						"orden": $(this).attr("identificador"),
+						"action": "imprimir"
+					},function(data){
+						el.prop("disabled", false);
+						if (data.documento != ''){
+							try{
+								if (ventanaOrden === undefined)
+									ventanaOrden = window.open(data.documento, '_blank');
+								else
+									ventanaOrden.document.href = data.documento;
+									
+								ventanaOrden.focus();
+							}catch(exception){
+								ventanaOrden = window.open(data.documento, '_blank');
+								ventanaOrden.focus();
+							}
+						}else
+							alert("El documento no se pudo generar");
+					}, "json");
+			});
+			
 			$("[action=modificar]").click(function(){
 				var el = jQuery.parseJSON($(this).attr("datos"));
 				
