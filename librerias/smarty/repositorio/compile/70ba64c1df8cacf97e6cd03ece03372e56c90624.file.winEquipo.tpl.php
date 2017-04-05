@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-04-03 11:32:36
+<?php /* Smarty version Smarty-3.1.11, created on 2017-04-04 20:30:02
          compiled from "templates/plantillas/modulos/ordenes/winEquipo.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:51963681758e277e7c47f39-47189472%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '70ba64c1df8cacf97e6cd03ece03372e56c90624' => 
     array (
       0 => 'templates/plantillas/modulos/ordenes/winEquipo.tpl',
-      1 => 1491237154,
+      1 => 1491355689,
       2 => 'file',
     ),
   ),

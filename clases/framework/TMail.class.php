@@ -21,7 +21,7 @@ class TMail{
 		global $ini;
 		$this->destinos = array();
 		$this->contestarA = "";
-		$this->origen = array("nombre" => "REOSA", "correo" => "info@reosa.com");
+		$this->origen = array("nombre" => "REOSA", "correo" => "govacas1@govacasa.com");
 		
 		$this->permitir = true;
 	}

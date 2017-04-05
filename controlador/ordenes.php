@@ -27,7 +27,7 @@ switch($objModulo->getId()){
 		global $sesion;
 		global $userSesion;
 		
-		if ($userSesion->getTipo() == 1)
+		if ($userSesion->getTipo() == "Administrador")
 			$sql = "select a.*, b.nombre as estado, b.color,
 					d.nombre as cliente, c.idCliente
 				from orden a join estado b using(idEstado)
@@ -122,20 +122,21 @@ switch($objModulo->getId()){
 				
 				
 				$obj = new TOrden($orden);
-				$cliente = new TCliente($orden->equipo->getCliente());
+				$cliente = new TCliente($obj->equipo->getCliente());
 				
 				$datos = array();
 				$datos['cliente.nombre'] = $cliente->getNombre();
-				$datos['orden.idOrden'] = $orden->getId();
+				$datos['orden.idOrden'] = $obj->getId();
 				
 				$email = new TMail();
 				$email->setTema("Orden de servicio");
-				#$email->setOrigen("Grupo Domi", $ini['mail']['user']);
-				$email->addDestino($cliente->getCorreo(), utf8_decode($cliente->getNombre()));
+				$email->setOrigen("REOSA", "info@reosa.com");
+				#$email->addDestino($cliente->getEmail(), utf8_decode($cliente->getNombre()));
+				$email->addDestino("hugooluisss@gmail.com", utf8_decode($cliente->getNombre()));
 				
 				$email->setBodyHTML(utf8_decode($email->construyeMail(file_get_contents("repositorio/mail/sendOrden.html"), $datos)));
 				
-				$smarty->assign("json", array("band" => true, "documento" => $documento));
+				$smarty->assign("json", array("band" => true, "documento" => $documento, "email" => $email->send()));
 			break;
 		}
 	break;

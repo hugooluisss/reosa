@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-04-03 11:25:47
+<?php /* Smarty version Smarty-3.1.11, created on 2017-04-04 20:30:02
          compiled from "templates/plantillas/modulos/equipos/add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:82337977658e2778ba7ae39-44077816%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e614e90522dd46bcb89bf7b3ac0cdb00965134f6' => 
     array (
       0 => 'templates/plantillas/modulos/equipos/add.tpl',
-      1 => 1491236728,
+      1 => 1491355689,
       2 => 'file',
     ),
   ),
@@ -15,9 +15,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.11',
   'unifunc' => 'content_58e2778ba7cfc3_19410371',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_58e2778ba7cfc3_19410371')) {function content_58e2778ba7cfc3_19410371($_smarty_tpl) {?><form role="form" id="frmAddEquipos" class="form-horizontal" onsubmit="javascript: return false;">
 	<div class="form-group">
