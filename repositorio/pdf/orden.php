@@ -38,47 +38,46 @@ class ROrden extends tFPDF{
 		$this->Image('repositorio/pdf/datos-orden.jpg', 0, 0, 190, 240);
 		$this->SetFont('Arial', '', 8);
 		
-		$this->SetXY(12.5, 10);
+		$this->SetXY(12.5, 40);
 		$this->Cell(20, 5, $this->orden->getId(), 0, 0, 'R');
 		
 		$fecha = explode("-", $this->orden->getFecha());
-		$this->SetXY(157, 10);
+		$this->SetXY(157, 40);
 		$this->Cell(5, 5, $fecha[2], 0, 0, 'R');
-		$this->SetXY(164, 10);
+		$this->SetXY(164, 40);
 		$this->Cell(5, 5, $fecha[1], 0, 0, 'R');
-		$this->SetXY(169, 10);
+		$this->SetXY(169, 40);
 		$this->Cell(10, 5, $fecha[0], 0, 0, 'R');
 		
-		$this->SetXY(23, 19); $this->Cell(70, 5, $this->cliente->getNombre(), 0, 0, 'L');
-		$this->SetXY(115, 19); $this->Cell(65, 5, $this->cliente->getDireccion(), 0, 0, 'L');
-		$this->SetXY(23, 24); $this->Cell(70, 5, $this->cliente->getCiudad(), 0, 0, 'L');
-		$this->SetXY(110, 24); $this->Cell(75, 5, $this->cliente->getColonia(), 0, 0, 'L');
+		$this->SetXY(23, 49); $this->Cell(70, 5, $this->cliente->getNombre(), 0, 0, 'L');
+		$this->SetXY(115, 49); $this->Cell(65, 5, $this->cliente->getDireccion(), 0, 0, 'L');
+		$this->SetXY(23, 53); $this->Cell(70, 5, $this->cliente->getCiudad(), 0, 0, 'L');
+		$this->SetXY(110, 53); $this->Cell(75, 5, $this->cliente->getColonia(), 0, 0, 'L');
 		
-		$this->SetXY(60, 29); $this->Cell(120, 5, $this->orden->getSolicitante(), 0, 0, 'L');
-		
-		
-		$this->SetXY(23, 40); $this->Cell(70, 5, $this->orden->getAsignado(), 0, 0, 'L');
-		$this->SetXY(10, 50); $this->MultiCell(80, 5, $this->orden->getFalla(), 0, 'L');
+		$this->SetXY(60, 57); $this->Cell(120, 5, $this->orden->getSolicitante(), 0, 0, 'L');
 		
 		
-		$this->SetXY(103, 40); $this->Cell(70, 5, $this->orden->equipo->getTipo(), 0, 0, 'L');
-		$this->SetXY(103, 45); $this->Cell(70, 5, $this->orden->equipo->getArea(), 0, 0, 'L');
-		$this->SetXY(106, 50); $this->Cell(70, 5, $this->orden->equipo->getMarca(), 0, 0, 'L');
-		$this->SetXY(108, 55); $this->Cell(70, 5, $this->orden->equipo->getModelo(), 0, 0, 'L');
-		$this->SetXY(110, 60); $this->Cell(70, 5, $this->orden->equipo->getCapacidad(), 0, 0, 'L');
+		$this->SetXY(23, 66); $this->Cell(70, 5, $this->orden->getAsignado(), 0, 0, 'L');
+		$this->SetXY(10, 75); $this->MultiCell(80, 4.5, utf8_decode($this->orden->getFalla()), 0, 'L');
 		
-		$this->SetXY(10, 69); $this->MultiCell(170, 5, $this->orden->getServicio(), 0, 'L');
+		$this->SetXY(103, 67); $this->Cell(70, 5, $this->orden->equipo->getTipo(), 0, 0, 'L');
+		$this->SetXY(103, 71.4); $this->Cell(70, 5, $this->orden->equipo->getArea(), 0, 0, 'L');
+		$this->SetXY(106, 75.6); $this->Cell(70, 5, $this->orden->equipo->getMarca(), 0, 0, 'L');
+		$this->SetXY(108, 80.1); $this->Cell(70, 5, $this->orden->equipo->getModelo(), 0, 0, 'L');
+		$this->SetXY(110, 84); $this->Cell(70, 5, $this->orden->equipo->getCapacidad(), 0, 0, 'L');
+		
+		$this->SetXY(10, 93); $this->MultiCell(170, 4.5, utf8_decode($this->orden->getServicio()), 0, 'L');
 		$this->SetDrawColor(0, 0, 0);
-		$this->SetXY(77, 90); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getLimpiezaCarcasa() == 1);
-		$this->SetXY(77, 95); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getLimpiezaPartesElectricas() == 1);
-		$this->SetXY(77, 100); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getLimpiezaSerpentinCondensador() == 1);
+		$this->SetXY(77, 110); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getLimpiezaCarcasa() == 1);
+		$this->SetXY(77, 114.5); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getLimpiezaPartesElectricas() == 1);
+		$this->SetXY(77, 119); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getLimpiezaSerpentinCondensador() == 1);
 		
-		$this->SetXY(170.8, 90); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getLimpiezaSerpentinEvaporador() == 1);
-		$this->SetXY(170.8, 95); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getChequeoCargaRefrigerante() == 1);
-		$this->SetXY(170.8, 100); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getChequeoElectricoConexiones() == 1);
+		$this->SetXY(170.8, 110.3); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getLimpiezaSerpentinEvaporador() == 1);
+		$this->SetXY(170.8, 114.8); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getChequeoCargaRefrigerante() == 1);
+		$this->SetXY(170.8, 119.2); $this->Cell(8, 4, " ", 0, 0, 'C', $this->orden->getChequeoElectricoConexiones() == 1);
 		
 		$elemento = json_decode($this->orden->getCompresor());
-		$y = 118;
+		$y = 135.9;
 		$this->SetXY(38, $y); $this->Cell(12, 4, $elemento->hp, 0, 0, 'R');
 		$this->SetXY(51, $y); $this->Cell(12, 4, $elemento->fases, 0, 0, 'R');
 		$this->SetXY(65, $y); $this->Cell(12, 4, $elemento->cantidad, 0, 0, 'R');
@@ -91,7 +90,7 @@ class ROrden extends tFPDF{
 		$this->SetXY(166, $y); $this->Cell(12, 4, $elemento->l2l3, 0, 0, 'R');
 		
 		$elemento = json_decode($this->orden->getEvaporador());
-		$y = 123;
+		$y = 140;
 		$this->SetXY(38, $y); $this->Cell(12, 4, $elemento->hp, 0, 0, 'R');
 		$this->SetXY(51, $y); $this->Cell(12, 4, $elemento->fases, 0, 0, 'R');
 		$this->SetXY(65, $y); $this->Cell(12, 4, $elemento->cantidad, 0, 0, 'R');
@@ -104,7 +103,7 @@ class ROrden extends tFPDF{
 		$this->SetXY(166, $y); $this->Cell(12, 4, $elemento->l2l3, 0, 0, 'R');
 		
 		$elemento = json_decode($this->orden->getCondensador());
-		$y = 128;
+		$y = 144.4;
 		$this->SetXY(38, $y); $this->Cell(12, 4, $elemento->hp, 0, 0, 'R');
 		$this->SetXY(51, $y); $this->Cell(12, 4, $elemento->fases, 0, 0, 'R');
 		$this->SetXY(65, $y); $this->Cell(12, 4, $elemento->cantidad, 0, 0, 'R');
@@ -116,22 +115,22 @@ class ROrden extends tFPDF{
 		$this->SetXY(152, $y); $this->Cell(12, 4, $elemento->l1l3, 0, 0, 'R');
 		$this->SetXY(166, $y); $this->Cell(12, 4, $elemento->l2l3, 0, 0, 'R');
 		
-		$this->SetXY(39, 143); $this->Cell(25, 4, $this->orden->getSuccion(), 0, 0, 'R');
-		$this->SetXY(39, 148); $this->Cell(25, 4, $this->orden->getDescarga(), 0, 0, 'R');
-		$this->SetXY(39, 153); $this->Cell(25, 4, $this->orden->getAceite(), 0, 0, 'R');
-		$this->SetXY(39, 158); $this->Cell(25, 4, $this->orden->getParoBaja(), 0, 0, 'R');
-		$this->SetXY(39, 163); $this->Cell(25, 4, $this->orden->getParoAlta(), 0, 0, 'R');
-		$this->SetXY(39, 168); $this->Cell(25, 4, $this->orden->getArranque(), 0, 0, 'R');
+		$this->SetXY(39, 155); $this->Cell(25, 4, $this->orden->getSuccion(), 0, 0, 'R');
+		$this->SetXY(39, 159.5); $this->Cell(25, 4, $this->orden->getDescarga(), 0, 0, 'R');
+		$this->SetXY(39, 164); $this->Cell(25, 4, $this->orden->getAceite(), 0, 0, 'R');
+		$this->SetXY(39, 168.5); $this->Cell(25, 4, $this->orden->getParoBaja(), 0, 0, 'R');
+		$this->SetXY(39, 173); $this->Cell(25, 4, $this->orden->getParoAlta(), 0, 0, 'R');
+		$this->SetXY(39, 177.5); $this->Cell(25, 4, $this->orden->getArranque(), 0, 0, 'R');
 		
-		$this->SetXY(153, 143); $this->Cell(25, 4, $this->orden->getDentroCamara(), 0, 0, 'R');
-		$this->SetXY(153, 148); $this->Cell(25, 4, $this->orden->getAguaEntrada(), 0, 0, 'R');
-		$this->SetXY(153, 153); $this->Cell(25, 4, $this->orden->getAguaSalida(), 0, 0, 'R');
-		$this->SetXY(153, 158); $this->Cell(25, 4, $this->orden->getAireInyeccion(), 0, 0, 'R');
-		$this->SetXY(153, 163); $this->Cell(25, 4, $this->orden->getAireRetorno(), 0, 0, 'R');
-		$this->SetXY(153, 168); $this->Cell(25, 4, $this->orden->getAmbiente(), 0, 0, 'R');
+		$this->SetXY(153, 155.2); $this->Cell(25, 4, $this->orden->getDentroCamara(), 0, 0, 'R');
+		$this->SetXY(153, 159.8); $this->Cell(25, 4, $this->orden->getAguaEntrada(), 0, 0, 'R');
+		$this->SetXY(153, 164.2); $this->Cell(25, 4, $this->orden->getAguaSalida(), 0, 0, 'R');
+		$this->SetXY(153, 168.7); $this->Cell(25, 4, $this->orden->getAireInyeccion(), 0, 0, 'R');
+		$this->SetXY(153, 173); $this->Cell(25, 4, $this->orden->getAireRetorno(), 0, 0, 'R');
+		$this->SetXY(153, 177.5); $this->Cell(25, 4, $this->orden->getAmbiente(), 0, 0, 'R');
 		
-		$this->SetXY(10, 180); $this->MultiCell(169, 5, $this->orden->getMateriales(), 0, 'L', 0);
-		$this->SetXY(10, 197); $this->MultiCell(169, 5, $this->orden->getComentarios(), 0, 'L', 0);
+		$this->SetXY(10, 188); $this->MultiCell(169, 4.5, $this->orden->getMateriales(), 0, 'L', 0);
+		$this->SetXY(10, 203); $this->MultiCell(169, 4.5, $this->orden->getComentarios(), 0, 'L', 0);
 		
 		foreach($this->orden->getFotos() as $foto){
 			$this->AddPage();
