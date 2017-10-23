@@ -10,9 +10,10 @@ TCliente = function(){
 				"direccion": datos.direccion,
 				"ciudad": datos.ciudad, 
 				"colonia": datos.colonia,
+				"correo": datos.correo,
 				"action": "add"
 			}, function(data){
-				if (data.band == 'false')
+				if (data.band == false)
 					console.log(data.mensaje);
 					
 				if (datos.fn.after !== undefined)

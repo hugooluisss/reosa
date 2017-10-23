@@ -180,16 +180,16 @@
 							<tbody>
 								<tr>
 									<td>Compresor</td>
-									<td><input id="txtCompresorHP" name="txtCompresorHP" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorFases" name="txtCompresorFases" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorCantidad" name="txtCompresorCantidad" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorAmp" name="txtCompresorAmp" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorL1" name="txtCompresorL1" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorL2" name="txtCompresorL2" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorL3" name="txtCompresorL3" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorL1L2" name="txtCompresorL1L2" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorL2L3" name="txtCompresorL2L3" class="form-control revision input-sm" value="0"/></td>
-									<td><input id="txtCompresorL1L3" name="txtCompresorL1L3" class="form-control revision input-sm" value="0"/></td>
+									<td><input id="txtCompresorHP" name="txtCompresorHP" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorFases" name="txtCompresorFases" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorCantidad" name="txtCompresorCantidad" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorAmp" name="txtCompresorAmp" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorL1" name="txtCompresorL1" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorL2" name="txtCompresorL2" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorL3" name="txtCompresorL3" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorL1L2" name="txtCompresorL1L2" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorL2L3" name="txtCompresorL2L3" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
+									<td><input id="txtCompresorL1L3" name="txtCompresorL1L3" class="form-control revision input-sm" style="min-width: 50px" value="0"/></td>
 								</tr>
 								<tr>
 									<td>Evaporador</td>

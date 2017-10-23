@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2017-04-04 20:30:02
+<?php /* Smarty version Smarty-3.1.11, created on 2017-10-23 10:20:38
          compiled from "templates/plantillas/modulos/clientes/add.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:52675634958e2674772d3b1-98713366%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '667e0b0ff96b02241c08529463356fb2da0ec7e7' => 
     array (
       0 => 'templates/plantillas/modulos/clientes/add.tpl',
-      1 => 1491355689,
+      1 => 1508771985,
       2 => 'file',
     ),
   ),
@@ -45,6 +45,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 				<label for="txtColonia" class="col-lg-2">Colonia</label>
 				<div class="col-lg-3">
 					<input class="form-control" id="txtColonia" name="txtColonia" type="text">
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="txtCorreo" class="col-lg-2">Correo electrónico</label>
+				<div class="col-lg-3">
+					<input class="form-control" id="txtCorreo" name="txtCorreo" type="text">
 				</div>
 			</div>
 		</div>

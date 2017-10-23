@@ -12,7 +12,7 @@ class TCliente{
 	private $direccion;
 	private $ciudad;
 	private $colonia;
-	private $email;
+	private $correo;
 	private $visible;
 	
 	/**
@@ -95,8 +95,8 @@ class TCliente{
 	* @return boolean True si se realizó sin problemas
 	*/
 	
-	public function setEmail($val = ''){
-		$this->email = $val;
+	public function setCorreo($val = ''){
+		$this->correo = $val;
 		return true;
 	}
 	
@@ -108,8 +108,8 @@ class TCliente{
 	* @return string Texto
 	*/
 	
-	public function getEmail(){
-		return $this->email;
+	public function getCorreo(){
+		return $this->correo;
 	}
 	
 	/**
@@ -216,7 +216,8 @@ class TCliente{
 				nombre = '".$this->getNombre()."',
 				direccion = '".$this->getDireccion()."',
 				ciudad = '".$this->getCiudad()."',
-				colonia = '".$this->getColonia()."'
+				colonia = '".$this->getColonia()."',
+				correo = '".$this->getCorreo()."'
 			WHERE idCliente = ".$this->getId());
 			
 		return $rs?true:false;

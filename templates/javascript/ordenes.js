@@ -263,7 +263,7 @@ $(document).ready(function(){
 			});
 			
 			var ventanaOrden = undefined;
-			
+			/*
 			$("[action=pdf]").click(function(){
 				var el = $(this)
 				el.prop("disabled", true);
@@ -287,6 +287,23 @@ $(document).ready(function(){
 							}
 						}else
 							alert("El documento no se pudo generar");
+					}, "json");
+			});
+			*/
+			
+			$("[action=email]").click(function(){
+				var el = $(this)
+				el.prop("disabled", true);
+				
+				$.post("cordenes", {
+						"orden": $(this).attr("identificador"),
+						"correo": prompt("Escribe la cuenta destino", $(this).attr("correo")),
+						"action": "imprimir"
+					},function(data){
+						el.prop("disabled", false);
+						
+						if (!data.band)
+							alert("El correo no pudo ser enviado");
 					}, "json");
 			});
 			

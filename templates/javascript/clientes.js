@@ -15,7 +15,10 @@ $(document).ready(function(){
 		debug: true,
 		rules: {
 			txtNombre: "required",
-			},
+			txtCorreo: {
+				email: true
+			}
+		},
 		wrapper: 'span', 
 		submitHandler: function(form){
 		
@@ -26,6 +29,7 @@ $(document).ready(function(){
 				direccion: $("#txtDireccion").val(),
 				ciudad: $("#txtCiudad").val(),
 				colonia: $("#txtColonia").val(),
+				correo: $("#txtCorreo").val(),
 				fn: {
 					after: function(datos){
 						if (datos.band){
@@ -65,6 +69,7 @@ $(document).ready(function(){
 				$("#txtDireccion").val(el.direccion);
 				$("#txtCiudad").val(el.ciudad);
 				$("#txtColonia").val(el.colonia);
+				$("#txtCorreo").val(el.correo);
 				$('#panelTabs a[href="#add"]').tab('show');
 			});
 			

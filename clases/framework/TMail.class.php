@@ -14,7 +14,7 @@ class TMail{
 	private $destinos;
 	private $origen;
 	private $contestarA;
-	private $adjuntos;
+	public $adjuntos;
 	private $tema;
 
 	public function TMail(){
@@ -24,6 +24,7 @@ class TMail{
 		$this->origen = array("nombre" => "REOSA", "correo" => "govacas1@govacasa.com");
 		
 		$this->permitir = true;
+		$this->adjuntos = array();
 	}
 	
 	public function setPermitir($band = true){

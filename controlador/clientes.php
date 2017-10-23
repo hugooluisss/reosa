@@ -23,6 +23,7 @@ switch($objModulo->getId()){
 				$obj->setDireccion($_POST['direccion']);
 				$obj->setCiudad($_POST['ciudad']);
 				$obj->setColonia($_POST['colonia']);
+				$obj->setCorreo($_POST['correo']);
 				
 				$smarty->assign("json", array("band" => $obj->guardar(), "identificador" =>$obj->getId()));
 			break;

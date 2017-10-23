@@ -1,5 +1,5 @@
 <div class="box">
-	<div class="box-body">
+	<div class="box-body table-responsive">
 		<table id="tblDatos" class="table table-bordered table-hover">
 			<thead>
 				<tr>

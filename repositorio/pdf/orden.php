@@ -49,22 +49,22 @@ class ROrden extends tFPDF{
 		$this->SetXY(169, 40);
 		$this->Cell(10, 5, $fecha[0], 0, 0, 'R');
 		
-		$this->SetXY(23, 49); $this->Cell(70, 5, $this->cliente->getNombre(), 0, 0, 'L');
-		$this->SetXY(115, 49); $this->Cell(65, 5, $this->cliente->getDireccion(), 0, 0, 'L');
-		$this->SetXY(23, 53); $this->Cell(70, 5, $this->cliente->getCiudad(), 0, 0, 'L');
-		$this->SetXY(110, 53); $this->Cell(75, 5, $this->cliente->getColonia(), 0, 0, 'L');
+		$this->SetXY(23, 49); $this->Cell(70, 5, utf8_decode($this->cliente->getNombre()), 0, 0, 'L');
+		$this->SetXY(115, 49); $this->Cell(65, 5, utf8_decode($this->cliente->getDireccion()), 0, 0, 'L');
+		$this->SetXY(23, 53); $this->Cell(70, 5, utf8_decode($this->cliente->getCiudad()), 0, 0, 'L');
+		$this->SetXY(110, 53); $this->Cell(75, 5, utf8_decode($this->cliente->getColonia()), 0, 0, 'L');
 		
-		$this->SetXY(60, 57); $this->Cell(120, 5, $this->orden->getSolicitante(), 0, 0, 'L');
+		$this->SetXY(60, 57); $this->Cell(120, 5, utf8_decode($this->orden->getSolicitante()), 0, 0, 'L');
 		
 		
-		$this->SetXY(23, 66); $this->Cell(70, 5, $this->orden->getAsignado(), 0, 0, 'L');
+		$this->SetXY(23, 66); $this->Cell(70, 5, utf8_decode($this->orden->getAsignado()), 0, 0, 'L');
 		$this->SetXY(10, 75); $this->MultiCell(80, 4.5, utf8_decode($this->orden->getFalla()), 0, 'L');
 		
 		$this->SetXY(103, 67); $this->Cell(70, 5, $this->orden->equipo->getTipo(), 0, 0, 'L');
-		$this->SetXY(103, 71.4); $this->Cell(70, 5, $this->orden->equipo->getArea(), 0, 0, 'L');
-		$this->SetXY(106, 75.6); $this->Cell(70, 5, $this->orden->equipo->getMarca(), 0, 0, 'L');
-		$this->SetXY(108, 80.1); $this->Cell(70, 5, $this->orden->equipo->getModelo(), 0, 0, 'L');
-		$this->SetXY(110, 84); $this->Cell(70, 5, $this->orden->equipo->getCapacidad(), 0, 0, 'L');
+		$this->SetXY(103, 71.4); $this->Cell(70, 5, utf8_decode($this->orden->equipo->getArea()), 0, 0, 'L');
+		$this->SetXY(106, 75.6); $this->Cell(70, 5, utf8_decode($this->orden->equipo->getMarca()), 0, 0, 'L');
+		$this->SetXY(108, 80.1); $this->Cell(70, 5, utf8_decode($this->orden->equipo->getModelo()), 0, 0, 'L');
+		$this->SetXY(110, 84); $this->Cell(70, 5, utf8_decode($this->orden->equipo->getCapacidad()), 0, 0, 'L');
 		
 		$this->SetXY(10, 93); $this->MultiCell(170, 4.5, utf8_decode($this->orden->getServicio()), 0, 'L');
 		$this->SetDrawColor(0, 0, 0);
@@ -129,12 +129,12 @@ class ROrden extends tFPDF{
 		$this->SetXY(153, 173); $this->Cell(25, 4, $this->orden->getAireRetorno(), 0, 0, 'R');
 		$this->SetXY(153, 177.5); $this->Cell(25, 4, $this->orden->getAmbiente(), 0, 0, 'R');
 		
-		$this->SetXY(10, 188); $this->MultiCell(169, 4.5, $this->orden->getMateriales(), 0, 'L', 0);
-		$this->SetXY(10, 203); $this->MultiCell(169, 4.5, $this->orden->getComentarios(), 0, 'L', 0);
+		$this->SetXY(10, 188); $this->MultiCell(169, 4.5, utf8_decode($this->orden->getMateriales()), 0, 'L', 0);
+		$this->SetXY(10, 203); $this->MultiCell(169, 4.5, utf8_decode($this->orden->getComentarios()), 0, 'L', 0);
 		
 		foreach($this->orden->getFotos() as $foto){
 			$this->AddPage();
-			$this->Image($foto->getNombre(), 10, 5);
+			$this->Image($foto->getNombre(), 10, 5, 170, 230);
 		}
 		
 	}
@@ -159,7 +159,7 @@ class ROrden extends tFPDF{
 		$file .= '.pdf';
 		parent::Output($file, 'F');
 		chmod($file, 0555);
-		//header('Location: temporal/'.$file);
+		#header('Location: temporal/'.$file);
 		
 		return $file;
 	}
